@@ -19,6 +19,7 @@ click = "*"
 coloredlogs = "*"
 sqlalchemy = "*"
 twilio = "*"
+pycodestyle = "*"
 
 
 [requires]

@@ -30,11 +30,12 @@ def run():
         app_config = config.get(xconfig.APP_NAME)
     except IOError as e:
         app_config = {}
-        logger.error("Error loading config: {name}".format(name=xconfig.APP_NAME))
-        logger.exception(e)
+        # logger.error("Error loading config: {name}".format(name=xconfig.APP_NAME))
+        # logger.exception(e)
+        logger.warning("Missing server config")
     app.run(
         host=app_config.get("host", "0.0.0.0"),
-        port=app_config.get("port", 8088)
+        port=app_config.get("port", 8732)
     )
 
 
@@ -81,6 +82,7 @@ def flake8():
 
 
 cli.add_command(run)
+cli.add_command(shell)
 cli.add_command(pep8)
 cli.add_command(flake8)
 
