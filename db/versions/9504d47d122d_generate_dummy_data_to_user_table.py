@@ -53,7 +53,7 @@ def upgrade():
 
     user_list = []
     for x in range(7):
-        if x < 2:
+        if x == 0:
             first_name = fake.first_name_male()
             user_list.append({
                 'id' : int(x+1),
@@ -67,7 +67,23 @@ def upgrade():
                 'latitude': fake.latitude(),
                 'longitude': fake.longitude(),
                 'language': random.choice(language_list),
-                'is_guide': fake.boolean()
+                'is_guide': False
+            })
+        elif x == 1:
+            first_name = fake.first_name_male()
+            user_list.append({
+                'id' : int(x+1),
+                'user_name': first_name,
+                'password': fake.password(length=10),
+                'first_name': first_name,
+                'last_name': fake.last_name_male(),
+                'birthday': fake.date_of_birth(),
+                'phone': fake.phone_number(),
+                'address': fake.address(),
+                'latitude': fake.latitude(),
+                'longitude': fake.longitude(),
+                'language': random.choice(language_list),
+                'is_guide': True
             })
         else:
             first_name = fake.first_name_female()
@@ -83,8 +99,25 @@ def upgrade():
                 'latitude': fake.latitude(),
                 'longitude': fake.longitude(),
                 'language': random.choice(language_list),
-                'is_guide': fake.boolean()
+                'is_guide': True
             })
+        # test user
+        first_name = "test"
+        user_list.append({
+                'id' : 8,
+                'user_name': 'test',
+                'password': 'test',
+                'first_name': first_name,
+                'last_name': fake.last_name_female(),
+                'birthday': fake.date_of_birth(),
+                'phone': fake.phone_number(),
+                'address': fake.address(),
+                'latitude': fake.latitude(),
+                'longitude': fake.longitude(),
+                'language': random.choice(language_list),
+                'is_guide': True
+            })
+        
         
     print (user_list)
     op.bulk_insert(my_table,
