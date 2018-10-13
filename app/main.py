@@ -42,12 +42,14 @@ def create_app(env=None, start_response=None):
     from app.views import auth
     from app.views import notification
     from app.views import services
+    from app.views import event
 
     app.register_blueprint(index.app)
     app.register_blueprint(users.app)
     app.register_blueprint(auth.app)
     app.register_blueprint(notification.app)
     app.register_blueprint(services.app)
+    app.register_blueprint(event.app)
 
     db.init_app(app)
 
