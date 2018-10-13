@@ -11,18 +11,18 @@ export class LoginComponent {
     constructor (UserApi) {
         this.api = UserApi;
         this.loginForm = new Proxy(target, {
-            get: (t,n)=>{
-                return;
+            get: (t, n) => {
+
             },
-            set: (t,n,v)=>{
-                t[n]=v;
+            set: (t, n, v) => {
+                t[n] = v;
             }
         });
     }
     login () {
         this.api.login(loginProxy);
     }
-    register(){
+    register () {
         // If we want to add a register page
     }
     static create () {

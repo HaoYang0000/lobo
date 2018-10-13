@@ -1,6 +1,6 @@
 import angular from 'angular';
 import restangular from 'restangular';
-import RestConfig from './rest.config.js';
+import RestConfig from './config.js';
 import UserApi from './user.api.js';
 import EventApi from './event.api.js';
 import ReviewApi from './review.api.js';
