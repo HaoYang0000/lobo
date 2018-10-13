@@ -9,6 +9,7 @@ from sqlalchemy.orm import joinedload, lazyload, Query, RelationshipProperty
 from sqlalchemy import inspect, exists, func
 import logging
 
+from app.models.UserModel import UserModel
 from libs.enums import RelationshipLoadOption
 
 logger = logging.getLogger('flask.app')
@@ -85,6 +86,15 @@ class BaseService:
                     query = BaseService._set_relationship_load_option(query, relationship, option)
 
         return query.all()
+
+    def get_multiple_nearby(self, uid: int) -> list:
+        # Get source user by uid
+        source_user = self.model.query.filter(self.model.id == uid).one_or_none()
+        # Get all guides
+        guides = self.get_multiple(filters=[UserModel.is_guide is True])
+        # Calculate distances for all guides (guide_uid, distance)
+        # Sort by distance; return sorted users
+        return guides
 
     def _apply_filters_to_query(self, query: Query, filters: list, kwarg_filters: dict) -> Query:
         """
