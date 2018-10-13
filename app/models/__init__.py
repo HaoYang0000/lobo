@@ -3,5 +3,6 @@ from app.models import (
     BaseModel,
     UserServiceRelationModel,
     EventModel,
-    UserEventRelationModel
+    UserEventRelationModel,
+    ReviewModel
 )
