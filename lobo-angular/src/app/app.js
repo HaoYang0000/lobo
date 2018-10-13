@@ -8,7 +8,7 @@ let app = () => {
   return {
 
       // template: require('./app.html'),
-      template: require('./templates/Main/main.html'),
+      template: require('./templates/Guides/guides.html'),
     controller: 'AppCtrl',
     controllerAs: 'app'
   }
