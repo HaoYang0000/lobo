@@ -1,4 +1,5 @@
 import angular from 'angular';
+import restangular from 'restangular';
 
 import '../style/app.css';
 
@@ -18,8 +19,7 @@ class AppCtrl {
 
 const MODULE_NAME = 'app';
 
-angular.module(MODULE_NAME, [])
-  .directive('app', app)
-  .controller('AppCtrl', AppCtrl);
+angular.module(MODULE_NAME, [restangular]).directive('app', app).controller('AppCtrl', AppCtrl);
+
 
 export default MODULE_NAME;
