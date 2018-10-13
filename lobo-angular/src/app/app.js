@@ -23,7 +23,6 @@ class AppCtrl {
 }
 class ApiService {
     constructor (Restangular, $log) {
-
         this.$log = $log;
         this.Restangular = Restangular;
     }
