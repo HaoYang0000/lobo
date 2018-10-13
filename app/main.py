@@ -39,21 +39,15 @@ def create_app(env=None):
     from app.views import index
     from app.views import users
     from app.views import auth
+    from app.views import notification
 
     app.register_blueprint(index.app)
     app.register_blueprint(users.app)
     app.register_blueprint(auth.app)
+    app.register_blueprint(notification.app)
 
-    # docs = FlaskApiSpec()
-
+    
     db.init_app(app)
-
-    # docs.register(
-    #     users.UserResourceList, endpoint='users.UserResourceList'
-    # )
-    # docs.register(
-    #     users.UserResourceDetail, endpoint='users.UserResourceDetail'
-    # )
 
     if app.debug:
         logger.info("{app} initialized".format(app='lobo'))
