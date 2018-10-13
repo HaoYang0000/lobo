@@ -1,4 +1,5 @@
 import json
+import os
 
 
 def get(name):
@@ -17,5 +18,5 @@ def get(name):
     Raises:
         IOError: If the config doesn't exist
     """
-    with open("/afn/lobo/config/{name}.json".format(name=name), 'r') as fp:
+    with open(f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}/config/{name}.json", 'r') as fp:
         return json.load(fp)
