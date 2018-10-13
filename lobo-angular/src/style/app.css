@@ -33,9 +33,20 @@ body{
 .guide-carousel .guide-card{
     width:200px;
     display: inline-block;
+    text-align: center;
+    border: 3px solid #31394d;
+    border-radius: 30px;
 }
-.guide-carousel img.guide-pic{
-    width:100%;
+.guide-carousel .guide-pic{
+    width: 120px;
+    border-radius: 100%;
+    border: 2px solid #31394d;
+    height: 120px;
+    background-size: contain;
+    margin:auto;
+}
+.guide-card .guide-rating i{
+    color:#31394d;
 }
 .main-container{
     display:flex;
