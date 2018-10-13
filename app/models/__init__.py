@@ -1,3 +1,5 @@
 from app.models import (
-    UserModel
+    UserModel,
+    BaseModel,
+    UserServiceRelationModel
 )
