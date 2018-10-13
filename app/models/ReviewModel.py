@@ -17,14 +17,9 @@ class ReviewModel(BaseModelExtended):
         nullable=True
     )
     
-    event_id = Column(
+    user_id = Column(
         mysql.INTEGER(unsigned=True, display_width=11),
-        ForeignKey('events.id', name='fk_review_event_id')
-    )
-
-    service_id = Column(
-        mysql.INTEGER(unsigned=True, display_width=11),
-        ForeignKey('services.id', name='fk_review_service_id')
+        ForeignKey('users.id', name='fk_review_user_id')
     )
 
     def __repr__(self):
@@ -33,15 +28,13 @@ class ReviewModel(BaseModelExtended):
                 id='{id}', \
                 text='{text}, \
                 rate='{rate}, \
-                event_id='{event_id}, \
-                service_id='{service_id} \
+                user_id='{event_id} \
                 ')"
         ).format(
             id=self.id,
             text=self.text,
             rate=self.rate,
-            event_id=self.event_id,
-            service_id=self.service_id
+            user_id=self.user_id
         )
 
 class ReviewModelSchema(BaseSchema):
