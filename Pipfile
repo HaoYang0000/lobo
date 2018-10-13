@@ -12,6 +12,7 @@ alembic = "*"
 marshmallow-sqlalchemy = "*"
 click = "*"
 coloredlogs = "*"
+sqlalchemy = "*"
 
 [requires]
 python_version = "3.6"
