@@ -1,13 +1,11 @@
 import logging
 
-import marshmallow
 from app.models.UserModel import UserModelSchema
-from app.models.UserModel import UserModel as User
 from flask import Blueprint, abort, make_response
 from flask_api import status
 from flask_apispec import doc, marshal_with, use_kwargs
 from flask_apispec.views import MethodResource
-from app.services.UserController import UserService
+from app.services.db.UserController import UserService
 from app.util.db_tool import unrequire
 
 logger = logging.getLogger(__name__)
