@@ -11,6 +11,7 @@ flask-sqlalchemy = "*"
 alembic = "*"
 marshmallow-sqlalchemy = "*"
 click = "*"
+coloredlogs = "*"
 
 [requires]
 python_version = "3.6"
