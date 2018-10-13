@@ -52,9 +52,8 @@ class UserModel(BaseModelExtended):
         nullable=True
     )
 
-    language_id = Column(
-        mysql.INTEGER(unsigned=True, display_width=11),
-        autoincrement=True,
+    language = Column(
+        mysql.VARCHAR(255),
         nullable=False
     )
     
