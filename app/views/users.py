@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 app = Blueprint(
     'users',
     __name__,
-    url_prefix='/users'
+    url_prefix='/api/users'
 )
 @doc(tags=['Users List view'])
 class UserResourceList(MethodResource):
