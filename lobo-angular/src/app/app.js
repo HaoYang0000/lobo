@@ -1,31 +1,33 @@
+'use strict';
 import angular from 'angular';
-import restangular from 'restangular';
-import RestConfig from './config/rest.js';
+import LoboConfig from './config';
+import LoboComponents from './templates';
 
 import '../style/app.css';
 
 let app = () => {
-  return {
+    return {
 
-      // template: require('./app.html'),
-      template: require('./templates/Guides/guides.html'),
-    controller: 'AppCtrl',
-    controllerAs: 'app'
-  }
+        // template: require('./app.html'),
+        template: require('./main.html'),
+        controller: 'AppCtrl',
+        controllerAs: 'app'
+    };
 };
 
 class AppCtrl {
-  constructor(Api) {
-    this.url = 'https://github.com/preboot/angular-webpack';
-    this.api = Api;
-  }
+    constructor (Api) {
+        this.url = 'https://github.com/preboot/angular-webpack';
+        this.api = Api;
+    }
 }
-class ApiService{
-    constructor(Restangular, $log){
+class ApiService {
+    constructor (Restangular, $log) {
+
         this.$log = $log;
         this.Restangular = Restangular;
     }
-    users(uuid){
+    users (uuid) {
         this.$log.debug('Hey!');
         return this.Restangular.one('users', uuid).get();
     }
@@ -33,12 +35,12 @@ class ApiService{
 
 const MODULE_NAME = 'app';
 
-angular.module(MODULE_NAME, [restangular]).directive('app', app).controller('AppCtrl', AppCtrl);
-
-angular.module(MODULE_NAME).service('Api', ApiService);
-
-angular.module(MODULE_NAME).config(RestConfig);
-
-
-
-export default MODULE_NAME;
+export default angular.module(MODULE_NAME,
+    [
+        LoboConfig,
+        LoboComponents
+    ]
+)
+    .directive('app', app)
+    .controller('AppCtrl', AppCtrl)
+    .service('Api', ApiService);
