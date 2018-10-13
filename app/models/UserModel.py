@@ -3,6 +3,7 @@ from marshmallow import fields
 from sqlalchemy import Column, UniqueConstraint, text
 from sqlalchemy.dialects import mysql
 
+
 class UserModel(BaseModelExtended):
     __tablename__ = 'users'
 
@@ -50,8 +51,9 @@ class UserModel(BaseModelExtended):
             phone=self.phone
         )
 
+
 class UserModelSchema(BaseSchema):
     id = fields.Integer(dump_only=True)
 
     class Meta(BaseMeta):
-        model = UserModelSchema
+        model = UserModel
