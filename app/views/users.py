@@ -33,7 +33,6 @@ class UserResourceList(MethodResource):
             limit=limit,
             kwarg_filters=kwargs
         ), status.HTTP_200_OK
-        return result, status.HTTP_200_OK
 
     @use_kwargs(UserModelSchema().fields)
     @marshal_with(UserModelSchema, code=status.HTTP_201_CREATED)
