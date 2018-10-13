@@ -1,5 +1,6 @@
 import angular from 'angular';
 import restangular from 'restangular';
+import RestConfig from './config/rest.js';
 
 import '../style/app.css';
 
@@ -27,16 +28,14 @@ class ApiService{
         return this.Restangular.one('users', uuid).get();
     }
 }
-class RestConfig{
-    constructor(RestangularProvider) {
-    RestangularProvider.setBaseUrl('localhost:8732/api/v1');
-}
-}
+
 const MODULE_NAME = 'app';
 
 angular.module(MODULE_NAME, [restangular]).directive('app', app).controller('AppCtrl', AppCtrl);
 
 angular.module(MODULE_NAME).service('Api', ApiService);
+
+angular.module(MODULE_NAME).config(RestConfig);
 
 
 

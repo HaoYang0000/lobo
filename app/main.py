@@ -9,9 +9,9 @@ from flask_apispec import FlaskApiSpec
 from libs.logger_capture import LoggerCapture
 from libs import config as afnconfig
 import xconfig
+from flask_cors import CORS
 
 db = SQLAlchemy()
-
 def create_app(env=None):
     app = Flask(__name__, static_url_path='/static')
     app._static_folder = os.path.join(
@@ -21,6 +21,7 @@ def create_app(env=None):
     app.template_folder = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}" \
                            f"/lobo-angular/dist/"
 
+    cors = CORS(app, resources={r"/*": {"origins": "*"}})
     config = xconfig.get_config()
     app.config.update(**config.__dict__)
 

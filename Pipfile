@@ -19,6 +19,7 @@ pymysql = "*"
 flask-mysql = "*"
 flask-api = "*"
 flask-apispec = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.6"
