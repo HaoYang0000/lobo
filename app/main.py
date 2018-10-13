@@ -19,7 +19,7 @@ def create_app(env=None):
         'static'
     )
     app.template_folder = f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}" \
-                           f"/lobo-angular/src/public/"
+                           f"/lobo-angular/dist/"
 
     config = xconfig.get_config()
     app.config.update(**config.__dict__)

@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, Response
 import json
+import os
 import logging
 
 app = Blueprint('index', __name__)
@@ -42,9 +43,24 @@ def health():
     return 'OK', 200
 
 
+def get_file(filename):  # pragma: no cover
+    try:
+        src = f"{os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))}" \
+                               f"/lobo-angular/dist/{filename}"
+        logger.debug('src {}'.format(src))
+        # Figure out how flask returns static files
+        # Tried:
+        # - render_template
+        # - send_file
+        # This should not be so non-obvious
+        return open(src).read()
+    except IOError as exc:
+        return str(exc)
+
 @app.route('/', methods=['GET'])
 def index():
     """
     Stub for index route
     """
-    return render_template("index.html")
+    # return Response(get_file("index.html"), mimetype='text/html')
+    return app.send_static_file('index.html')
