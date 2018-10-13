@@ -15,5 +15,4 @@ export default class UserApi {
             'password': login.password
         });
     }
-    login
 }
