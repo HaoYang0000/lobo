@@ -62,5 +62,4 @@ def index():
     """
     Stub for index route
     """
-    # return Response(get_file("index.html"), mimetype='text/html')
-    return app.send_static_file('index.html')
+    return Response('ok')

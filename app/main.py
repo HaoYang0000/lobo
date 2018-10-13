@@ -12,7 +12,7 @@ import xconfig
 from flask_cors import CORS
 
 db = SQLAlchemy()
-def create_app(env=None):
+def create_app(env=None, start_response=None):
     app = Flask(__name__, static_url_path='/static')
     app._static_folder = os.path.join(
         os.path.dirname(__file__),
