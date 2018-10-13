@@ -12,6 +12,8 @@ from subprocess import call
 
 
 # pep8 setup
+from libs.security import JWTConfig, create_token
+
 cwd = os.path.dirname(os.path.realpath(__file__))
 _pep8_excluded_patterns = []
 
@@ -139,11 +141,26 @@ def current():
     alembic_command.current(alembic_config, verbose=True)
 
 
+@click.group()
+def token():
+    pass
+
+
+@token.command()
+@click.option('--user-id', default=-1)
+def test_token(user_id):
+    JWTConfig()
+    JWTConfig.jwt_exp_seconds = 900  # 15 minutes
+    click.echo(create_token(user_id=user_id))
+
+
 cli.add_command(run)
 cli.add_command(shell)
 cli.add_command(pep8)
 cli.add_command(flake8)
 cli.add_command(db)
+cli.add_command(token)
+
 
 if __name__ == '__main__':
     cli()

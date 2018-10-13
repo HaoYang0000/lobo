@@ -22,6 +22,7 @@ flask-apispec = "*"
 flask-cors = "*"
 gunicorn = "*"
 faker = "*"
+pyjwt = "*"
 
 [requires]
 python_version = "3.6"
