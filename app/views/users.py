@@ -15,9 +15,12 @@ app = Blueprint(
     __name__,
     url_prefix='/api/users'
 )
+
+
 @doc(tags=['Users List view'])
 class UserResourceList(MethodResource):
     user_service = UserService()
+
     @marshal_with(UserModelSchema(many=True), code=status.HTTP_200_OK)
     @use_kwargs({
         **RequestParams.pagination_params(),
@@ -40,6 +43,27 @@ class UserResourceList(MethodResource):
     def post(self, **kwargs):
         new_user = self.user_service.create(**kwargs)
         return new_user, status.HTTP_201_CREATED
+
+
+@doc(tags=['Nearest Users List view'])
+class UsersNearbyResourceList(MethodResource):
+    user_service = UserService()
+
+    @marshal_with(UserModelSchema(many=True), code=status.HTTP_200_OK)
+    @use_kwargs({
+        **RequestParams.pagination_params(),
+        **unrequire(UserModelSchema().fields)
+    })
+    @doc(description='return all nearby guides')
+    def get(self, **kwargs):
+        uid = kwargs.pop('uid')
+        page = kwargs.pop('page')
+        limit = kwargs.pop('limit')
+
+        return self.user_service.get_multiple_nearby(
+            uid=uid,
+        ), status.HTTP_200_OK
+
 
 @doc(tags=['Users detail view'])
 class UserResourceDetail(MethodResource):
@@ -78,9 +102,15 @@ class UserResourceDetail(MethodResource):
             abort(status.HTTP_404_NOT_FOUND)
         return result, status.HTTP_200_OK
 
+
 app.add_url_rule(
     '',
     view_func=UserResourceList.as_view('UserResourceList'),
+    methods=['GET', 'POST']
+)
+app.add_url_rule(
+    '/nearest/<int:uid>',
+    view_func=UsersNearbyResourceList.as_view('UsersNearbyResourceList'),
     methods=['GET', 'POST']
 )
 app.add_url_rule(
