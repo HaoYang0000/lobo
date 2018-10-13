@@ -12,8 +12,8 @@ class UserModel(BaseModelExtended):
         nullable=False
     )
 
-    password = Column(
-        mysql.VARCHAR(255),
+    hashed_password = Column(
+        mysql.TEXT,
         nullable=False
     )
 
@@ -69,7 +69,7 @@ class UserModel(BaseModelExtended):
                 id='{id}', \
                 is_guide='{is_guide}', \
                 user_name='{user_name}, \
-                password='{password}, \
+                hashed_password='{hashed_password}, \
                 first_name='{first_name}, \
                 last_name='{last_name}, \
                 phone='{phone}, \
@@ -82,7 +82,7 @@ class UserModel(BaseModelExtended):
         ).format(
             id=self.id,
             user_name=self.user_name,
-            password=self.password,
+            hashed_password=self.hashed_password,
             first_name=self.first_name,
             last_name=self.last_name,
             phone=self.phone,
@@ -101,3 +101,12 @@ class UserModelSchema(BaseSchema):
 
     class Meta(BaseMeta):
         model = UserModel
+        exclude = ['hashed_password']
+
+
+class UserAuthSchema(BaseSchema):
+
+    class Meta(BaseMeta):
+        model = UserModel
+        exclude = ['hashed_password']
+        dump_only = ['id', 'jwt']
