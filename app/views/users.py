@@ -8,6 +8,7 @@ from flask_apispec.views import MethodResource
 from app.services.db.UserController import UserService
 from app.util.db_tool import unrequire
 from libs.parameters import RequestParams
+from libs.security import get_token_info
 
 logger = logging.getLogger(__name__)
 app = Blueprint(
@@ -28,6 +29,7 @@ class UserResourceList(MethodResource):
     })
     @doc(description='return all users')
     def get(self, **kwargs):
+        _ = get_token_info()
         page = kwargs.pop('page')
         limit = kwargs.pop('limit')
 
@@ -41,6 +43,7 @@ class UserResourceList(MethodResource):
     @marshal_with(UserModelSchema, code=status.HTTP_201_CREATED)
     @doc(description='Create a new user')
     def post(self, **kwargs):
+        _ = get_token_info()
         new_user = self.user_service.create(**kwargs)
         return new_user, status.HTTP_201_CREATED
 
@@ -68,26 +71,30 @@ class UsersNearbyResourceList(MethodResource):
 @doc(tags=['Users detail view'])
 class UserResourceDetail(MethodResource):
     user_service = UserService()
+
     @marshal_with(UserModelSchema, code=status.HTTP_200_OK)
     @doc(description='return user with id')
     def get(self, user_id, **kwargs):
+        _ = get_token_info()
         result = self.user_service.get_by_id(user_id)
         if result == None:
             abort(status.HTTP_404_NOT_FOUND)
         return result, status.HTTP_200_OK
-    
+
     @marshal_with(None, code=status.HTTP_204_NO_CONTENT)
     @doc(description='delete a user')
     def delete(self, user_id, **kwargs):
+        _ = get_token_info()
         result = self.user_service.delete_by_id(user_id)
         if result == False:
             abort(status.HTTP_404_NOT_FOUND)
         return make_response('', status.HTTP_204_NO_CONTENT)
-    
+
     @use_kwargs(UserModelSchema().fields)
     @marshal_with(UserModelSchema, code=status.HTTP_200_OK)
     @doc(description='update a existing user')
     def put(self, user_id, **kwargs):
+        _ = get_token_info()
         result = self.user_service.update_by_id(user_id, kwargs)
         if result == None:
             abort(status.HTTP_404_NOT_FOUND)
@@ -97,6 +104,7 @@ class UserResourceDetail(MethodResource):
     @doc(description='partially update a recurring frequency')
     @marshal_with(UserModelSchema, code=status.HTTP_200_OK)
     def patch(self, user_id, **kwargs):
+        _ = get_token_info()
         result = self.user_service.update_by_id(user_id, kwargs)
         if result == None:
             abort(status.HTTP_404_NOT_FOUND)
