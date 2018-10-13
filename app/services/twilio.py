@@ -5,12 +5,13 @@ TWILIO_TOKEN = "75bbea7d2a442e81a244925717668cde"
 
 
 def send_sms(to_number, body, from_number="3145961729"):
-    # Sample code from https://www.twilio.com/docs/libraries/python
-    account_sid = "ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-    auth_token = "your_auth_token"
-    client = Client(account_sid, auth_token)
+    global TWILIO_SID
+    global TWILIO_TOKEN
+
+    # https://www.twilio.com/docs/libraries/python
+    client = Client(TWILIO_SID, TWILIO_TOKEN)
     message = client.messages.create(
-        to="+15558675309",
-        from_="+15017250604",
-        body="Hello from Python!")
+        to=to_number,
+        from_=from_number,
+        body=body)
     return message
