@@ -65,7 +65,7 @@ def upgrade():
                 'phone': fake.phone_number(),
                 'address': fake.address(),
                 'latitude': fake.latitude(),
-                'longtitude': fake.longitude(),
+                'longitude': fake.longitude(),
                 'language': random.choice(language_list),
                 'is_guide': fake.boolean()
             })
@@ -81,7 +81,7 @@ def upgrade():
                 'phone': fake.phone_number(),
                 'address': fake.address(),
                 'latitude': fake.latitude(),
-                'longtitude': fake.longitude(),
+                'longitude': fake.longitude(),
                 'language': random.choice(language_list),
                 'is_guide': fake.boolean()
             })
