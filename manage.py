@@ -31,16 +31,10 @@ def run():
     """
     app = main.create_app()
     logger = logging.getLogger()
-    try:
-        app_config = config.get(xconfig.APP_NAME)
-    except IOError as e:
-        app_config = {}
-        # logger.error("Error loading config: {name}".format(name=xconfig.APP_NAME))
-        # logger.exception(e)
-        logger.warning("Missing server config")
+    logger.debug("Running on 127.0.0.1:8732")
     app.run(
-        host=app_config.get("host", "0.0.0.0"),
-        port=app_config.get("port", 8732)
+        host="127.0.0.1",
+        port=8732
     )
 
 
