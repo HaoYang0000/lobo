@@ -34,6 +34,6 @@ config = {
     'prod': ProductionConfig
 }
 
-
+APP_NAME='Lobo'
 def get_config():
     return config['default']()
