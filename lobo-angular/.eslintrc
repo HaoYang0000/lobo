@@ -1,0 +1,98 @@
+env:
+  browser:                      true
+  es6:                          true
+plugins:
+  - html
+  - json
+  - jasmine
+  - angular
+  - no-loops
+globals:
+  angular:                      true
+  "$":                          true
+  _:                            true
+  PDFJS:                        true
+  jsPDF:                        true
+  Promise:                      true
+  staticDirectory:              true
+  tinycolor:                    true
+  performance:                  true
+  io:                           true
+  jasmine:                      true
+  describe:                     true
+  xdescribe:                    true
+  before:                       true
+  beforeEach:                   true
+  after:                        true
+  afterEach:                    true
+  it:                           true
+  xit:                          true
+  inject:                       true
+  expect:                       true
+  spyOn:                        true
+  StateMachine:                 true
+  paper:                        true
+  Model:                        true
+  "$tracker":                   true
+  pako:                         true
+  canvg:                        true
+  OT:                           true
+  initLayoutContainer:          true
+  chrome:                       true
+parserOptions:
+  ecmaVersion:                  2017
+extends:
+  - standard
+rules:
+  indent:
+    - error
+    - 4
+    - SwitchCase:               1
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - always
+  no-eval:                      error
+  no-mixed-spaces-and-tabs:     error
+  no-multi-spaces:              error
+  no-unused-vars:
+    - warn
+    - args:                     none
+      vars:                     all
+  no-extra-semi:
+    - warn
+  no-extra-parens:
+    - warn
+  valid-typeof:
+    - warn
+  no-unsafe-negation:
+    - warn
+  no-floating-decimal:
+    - warn
+  no-new:                       0
+  require-await:
+    - error
+  angular/on-watch:             2
+  angular/rest-service:
+    - 2
+    - Restangular
+  angular/interval-service:     2
+  angular/angularelement:       2
+  angular/on-destroy:           2
+  angular/file-name:
+    - 2
+    - typeSeparator:            dot
+      nameStyle:                dash
+      ignoreTypeSuffix:         'true'
+  angular/module-name:
+    - 2
+    - focalcast.
+  angular/prefer-component:     2
+  no-loops/no-loops:            2
+  no-console:                   off
+  standard/no-callback-literal: off

@@ -7,6 +7,7 @@ from flask_apispec import doc, marshal_with, use_kwargs
 from flask_apispec.views import MethodResource
 from app.services.db.UserController import UserService
 from app.util.db_tool import unrequire
+from libs.parameters import RequestParams
 
 logger = logging.getLogger(__name__)
 app = Blueprint(
@@ -18,9 +19,20 @@ app = Blueprint(
 class UserResourceList(MethodResource):
     user_service = UserService()
     @marshal_with(UserModelSchema(many=True), code=status.HTTP_200_OK)
+    @use_kwargs({
+        **RequestParams.pagination_params(),
+        **unrequire(UserModelSchema().fields)
+    })
     @doc(description='return all users')
     def get(self, **kwargs):
-        result = self.user_service.get_all()
+        page = kwargs.pop('page')
+        limit = kwargs.pop('limit')
+
+        return self.user_service.get_multiple(
+            page=page,
+            limit=limit,
+            kwarg_filters=kwargs
+        ), status.HTTP_200_OK
         return result, status.HTTP_200_OK
 
     @use_kwargs(UserModelSchema().fields)
