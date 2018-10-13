@@ -3,12 +3,19 @@ export default function StateConfig ($stateProvider) {
         {
             name: 'home',
             url: '/',
-            template: '<lobo-home/>'
-        },
+            template: '<lobo-home/>',
+        }
+    ).state(
         {
-            name: 'inbox',
-            url: '/inbox',
-            template: '<lobo-index/>'
+            name: 'home.inbox',
+            url: '/inbox/',
+            template: '<lobo-inbox/>'
+        }
+    ).state(
+        {
+            name: 'home.guides',
+            url:'/',
+            template: '<lobo-guides/>'
         }
     );
 }
