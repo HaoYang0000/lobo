@@ -1,9 +1,7 @@
-from flask_sqlalchemy import SQLAlchemy
+from app.main import db
 from marshmallow_sqlalchemy import ModelSchema
 from sqlalchemy import Column, text
 from sqlalchemy.dialects import mysql
-
-db = SQLAlchemy()
 
 class BaseModel(db.Model):
     __abstract__ = True

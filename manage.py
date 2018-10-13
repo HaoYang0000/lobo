@@ -1,6 +1,4 @@
 #! /usr/bin/env python
-from alembic.config import Config as alembic_config_class
-from alembic import command as alembic_command
 import click
 import sys
 import os
@@ -15,9 +13,6 @@ from subprocess import call
 cwd = os.path.dirname(os.path.realpath(__file__))
 _pep8_excluded_patterns = []
 
-# alembic setup
-alembic_config = alembic_config_class('db/alembic.ini')
-
 
 @click.group()
 def cli():
@@ -31,10 +26,15 @@ def run():
     """
     app = main.create_app()
     logger = logging.getLogger()
-    logger.debug("Running on 127.0.0.1:8732")
+    try:
+        app_config = config.get(xconfig.APP_NAME)
+    except IOError as e:
+        app_config = {}
+        logger.error("Error loading config: {name}".format(name=xconfig.APP_NAME))
+        logger.exception(e)
     app.run(
-        host="127.0.0.1",
-        port=8732
+        host=app_config.get("host", "0.0.0.0"),
+        port=app_config.get("port", 8088)
     )
 
 
@@ -80,69 +80,9 @@ def flake8():
     call(["flake8"])
 
 
-# namespace for db commands
-@click.group()  # noqa
-def db():
-    """ Schema related commands.
-    """
-    pass
-
-
-@db.command()
-@click.option(
-    '--revision',
-    default='head',
-    help="the revision to upgrade to. defaults to head."
-)
-@click.option('--sql', is_flag=True)
-def upgrade(revision, sql):
-    """ Upgrade database to a revision
-    """
-    alembic_command.upgrade(alembic_config, revision, sql=sql)
-
-
-@db.command()
-@click.option(
-    '--revision',
-    required=True,
-    help="the revision to downgrade to."
-)
-@click.option('--sql', is_flag=True)
-def downgrade(revision, sql):
-    """ Downgrade database to a revision
-    """
-    alembic_command.downgrade(alembic_config, revision, sql=sql)
-
-
-@db.command()
-@click.option(
-    '--message',
-    '-m',
-    required=True,
-    help="description of this schema change."
-)
-def revision(message):
-    """ Generate a schema change from model changes
-    """
-    alembic_command.revision(
-        alembic_config,
-        message=message,
-        autogenerate=True
-    )
-
-
-@db.command()
-def current():
-    """ Downgrade database to a revision
-    """
-    alembic_command.current(alembic_config, verbose=True)
-
-
 cli.add_command(run)
-cli.add_command(shell)
 cli.add_command(pep8)
 cli.add_command(flake8)
-cli.add_command(db)
 
 if __name__ == '__main__':
     cli()

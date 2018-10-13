@@ -16,6 +16,9 @@ sqlalchemy = "*"
 twilio = "*"
 pycodestyle = "*"
 pymysql = "*"
+flask-mysql = "*"
+flask-api = "*"
+flask-apispec = "*"
 
 [requires]
 python_version = "3.6"

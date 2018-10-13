@@ -2,7 +2,6 @@ from flask import Blueprint
 import json
 import logging
 
-
 app = Blueprint('index', __name__)
 logger = logging.getLogger(__name__)
 
@@ -41,7 +40,6 @@ def health():
     :return: (tuple) 'OK', HTTP 200 Response
     """
     return 'OK', 200
-
 
 @app.route('/', methods=['GET', 'POST'])
 def index():

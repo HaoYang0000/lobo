@@ -3,14 +3,14 @@ import os
 import sys
 import logging
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 import coloredlogs
+from flask_apispec import FlaskApiSpec
 from libs.logger_capture import LoggerCapture
 from libs import config as afnconfig
 import xconfig
-from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
-
 
 def create_app(env=None):
     app = Flask(__name__, static_url_path='/static')
@@ -24,6 +24,8 @@ def create_app(env=None):
 
     app.config['SQLALCHEMY_DATABASE_URI'] = _create_db_string(afnconfig.get('db'))
 
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
     logger = logging.getLogger()
     logger.setLevel(config.log_level)
     coloredlogs.install(
@@ -33,8 +35,21 @@ def create_app(env=None):
     sys.stdout = LoggerCapture(logger.debug)
 
     from app.views import index
+    from app.views import users
 
     app.register_blueprint(index.app)
+    app.register_blueprint(users.app)
+
+    # docs = FlaskApiSpec()
+
+    db.init_app(app)
+
+    # docs.register(
+    #     users.UserResourceList, endpoint='users.UserResourceList'
+    # )
+    # docs.register(
+    #     users.UserResourceDetail, endpoint='users.UserResourceDetail'
+    # )
 
     if app.debug:
         logger.info("{app} initialized".format(app='lobo'))
