@@ -18,12 +18,12 @@ class ReviewModel(BaseModelExtended):
     )
     
     event_id = Column(
-        mysql.INTEGER(unsigned=True, display_width=11,nullable=True),
+        mysql.INTEGER(unsigned=True, display_width=11),
         ForeignKey('events.id', name='fk_review_event_id')
     )
 
     service_id = Column(
-        mysql.INTEGER(unsigned=True, display_width=11,nullable=True),
+        mysql.INTEGER(unsigned=True, display_width=11),
         ForeignKey('services.id', name='fk_review_service_id')
     )
 
