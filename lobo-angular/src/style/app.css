@@ -20,3 +20,20 @@
   /*text-align: center;*/
   /*font-size: 0.8em;*/
 /*}*/
+body{
+    font-family: 'Raleway', sans-serif;
+}
+.guide-slide{
+    /*padding:10px;*/
+}
+.guide-carousel{
+    white-space: nowrap;
+    overflow: scroll;
+}
+.guide-carousel .guide-card{
+    width:200px;
+    display: inline-block;
+}
+.guide-carousel img.guide-pic{
+    width:100%;
+}
