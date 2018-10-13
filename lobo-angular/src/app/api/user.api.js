@@ -3,11 +3,11 @@ export default class UserApi {
         this.rest = Restangular.service('users');
         this.auth = Restangular.service('auth');
     }
-    list () {
-
+    list (params) {
+        return this.rest.get(params);
     }
     retrieve (userId) {
-        this.rest.one(userId).get();
+        return this.rest.one(userId).get();
     }
     login (login) {
         return this.auth.post(undefined, {
