@@ -97,6 +97,7 @@ class UserModel(BaseModelExtended):
 
 class UserModelSchema(BaseSchema):
     id = fields.Integer(dump_only=True)
+    distance = fields.Float(dump_only=True)
 
     class Meta(BaseMeta):
         model = UserModel

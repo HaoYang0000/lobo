@@ -8,6 +8,7 @@ from sqlalchemy import inspect, exists, Column
 from sqlalchemy.orm import joinedload, lazyload, Query, RelationshipProperty
 from sqlalchemy import inspect, exists, func
 import logging
+from app.services.location import get_distance
 
 from app.models.UserModel import UserModel
 from libs.enums import RelationshipLoadOption
@@ -90,14 +91,18 @@ class BaseService:
     def get_multiple_nearby(self, uid: int) -> list:
         # Get source user by uid
         source_user = self.model.query.filter(self.model.id == uid).one_or_none()
+
         # Get all guides
         guides = self.get_multiple(filters=[UserModel.is_guide == True])
 
-        # import pdb; pdb.set_trace()
+        for guide in guides:
+            distance = get_distance(source_user.latitude, source_user.longitude,
+                                    guide.latitude, guide.longitude)
+            guide.distance = distance
 
         # Calculate distances for all guides (guide_uid, distance)
         # Sort by distance; return sorted users
-        return guides
+        return sorted(guides, key=lambda k: k.distance)
 
     def _apply_filters_to_query(self, query: Query, filters: list, kwarg_filters: dict) -> Query:
         """
