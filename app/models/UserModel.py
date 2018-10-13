@@ -77,7 +77,7 @@ class UserModel(BaseModelExtended):
                 address='{address}, \
                 longitude='{longitude}, \
                 latitude='{latitude}, \
-                language_id='{language_id}' \
+                language='{language}' \
                 ')"
         ).format(
             id=self.id,
@@ -90,7 +90,7 @@ class UserModel(BaseModelExtended):
             address=self.address,
             longitude=self.longitude,
             latitude=self.latitude,
-            language_id=self.language_id,
+            language=self.language,
             is_guide=self.is_guide
         )
 

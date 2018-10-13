@@ -91,7 +91,10 @@ class BaseService:
         # Get source user by uid
         source_user = self.model.query.filter(self.model.id == uid).one_or_none()
         # Get all guides
-        guides = self.get_multiple(filters=[UserModel.is_guide is True])
+        guides = self.get_multiple(filters=[UserModel.is_guide == True])
+
+        # import pdb; pdb.set_trace()
+
         # Calculate distances for all guides (guide_uid, distance)
         # Sort by distance; return sorted users
         return guides
