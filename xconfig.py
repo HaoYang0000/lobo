@@ -1,9 +1,6 @@
 import libs.config
 import logging
 
-APP_NAME = "py36-skeleton"
-APP_CONFIG_FOLDER = "skeleton"
-
 
 class Config(object):
     def __init__(self):
@@ -38,13 +35,5 @@ config = {
 }
 
 
-def get_config(env=None):
-    """ convenience function to get config.
-    allows for complex env determination
-    """
-    env_config = env or libs.config.get('env', folder='')['env']
-
-    try:
-        return config[env_config]()
-    except KeyError:
-        return config['default']()
+def get_config():
+    return config['default']()

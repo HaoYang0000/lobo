@@ -1,8 +1,7 @@
 import json
-import xconfig
 
 
-def get(name, folder=None):
+def get(name):
     """ Simple utility to fetch configs in /afn
 
     To get a config at /afn/config/env.json, pass 'env', folder=''
@@ -18,7 +17,5 @@ def get(name, folder=None):
     Raises:
         IOError: If the config doesn't exist
     """
-    if folder is None:
-        folder = xconfig.APP_CONFIG_FOLDER
-    with open("/afn/config/{folder}/{name}.json".format(name=name, folder=folder), 'r') as fp:
+    with open("/afn/lobo/config/{name}.json".format(name=name), 'r') as fp:
         return json.load(fp)
