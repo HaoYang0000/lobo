@@ -1,5 +1,9 @@
+
 export class HomeComponent {
-    constructor () {
+    constructor (UserApi) {
+
+
+
     }
     $onInit () {
 
