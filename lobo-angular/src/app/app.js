@@ -1,6 +1,7 @@
+'use strict';
 import angular from 'angular';
-import restangular from 'restangular';
-import RestConfig from './config/rest.js';
+import LoboConfig from './config';
+import LoboComponents from './templates';
 
 import '../style/app.css';
 
@@ -8,7 +9,7 @@ let app = () => {
     return {
 
         // template: require('./app.html'),
-        template: require('./templates/Main/main.html'),
+        template: require('./main.html'),
         controller: 'AppCtrl',
         controllerAs: 'app'
     };
@@ -34,10 +35,12 @@ class ApiService {
 
 const MODULE_NAME = 'app';
 
-angular.module(MODULE_NAME, [restangular]).directive('app', app).controller('AppCtrl', AppCtrl);
-
-angular.module(MODULE_NAME).service('Api', ApiService);
-
-angular.module(MODULE_NAME).config(RestConfig);
-
-export default MODULE_NAME;
+export default angular.module(MODULE_NAME,
+    [
+        LoboConfig,
+        LoboComponents
+    ]
+)
+    .directive('app', app)
+    .controller('AppCtrl', AppCtrl)
+    .service('Api', ApiService);
