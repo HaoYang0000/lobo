@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 app = Blueprint(
     'notification',
     __name__,
-    url_prefix='/notification'
+    url_prefix='/api/notification'
 )
 
 @doc(tags=['Send user notifications'])

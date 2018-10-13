@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 app = Blueprint(
     'auth',
     __name__,
-    url_prefix='/auth'
+    url_prefix='/api/auth'
 )
 
 @doc(tags=['Users List view'])
