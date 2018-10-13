@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 import json
 import logging
 
@@ -41,9 +41,10 @@ def health():
     """
     return 'OK', 200
 
-@app.route('/', methods=['GET', 'POST'])
+
+@app.route('/', methods=['GET'])
 def index():
     """
     Stub for index route
     """
-    return "It's alive!"
+    return render_template("index.html")
