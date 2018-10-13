@@ -7,6 +7,7 @@ name = "pypi"
 
 [packages]
 flask = "*"
+coloredlogs = "*"
 
 [requires]
 python_version = "3.6"
