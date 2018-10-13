@@ -67,6 +67,24 @@ class UsersNearbyResourceList(MethodResource):
             uid=uid,
         ), status.HTTP_200_OK
 
+@doc(tags=['Events associate with user'])
+class UserEventResourceList(MethodResource):
+    user_service = UserService()
+
+    @marshal_with(UserModelSchema(many=True), code=status.HTTP_200_OK)
+    @use_kwargs({
+        **RequestParams.pagination_params(),
+        **unrequire(UserModelSchema().fields)
+    })
+    @doc(description='return all nearby guides')
+    def get(self, **kwargs):
+        uid = kwargs.pop('uid')
+        page = kwargs.pop('page')
+        limit = kwargs.pop('limit')
+
+        return self.user_service.get_multiple_nearby(
+            uid=uid,
+        ), status.HTTP_200_OK
 
 @doc(tags=['Users detail view'])
 class UserResourceDetail(MethodResource):
@@ -125,4 +143,9 @@ app.add_url_rule(
     '/<int:user_id>',
     view_func=UserResourceDetail.as_view('UserResourceDetail'),
     methods=['GET', 'PUT', 'DELETE', 'PATCH']
+)
+app.add_url_rule(
+    '/<int:user_id>/events',
+    view_func=UserEventResourceList.as_view('UserEventResourceList'),
+    methods=['GET']
 )
