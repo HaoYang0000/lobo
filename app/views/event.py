@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 app = Blueprint(
     'events',
     __name__,
-    url_prefix='/events'
+    url_prefix='/api/events'
 )
 @doc(tags=['Events List view'])
 class EventResourceList(MethodResource):

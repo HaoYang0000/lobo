@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 app = Blueprint(
     'reviews',
     __name__,
-    url_prefix='/reviews'
+    url_prefix='/api/reviews'
 )
 @doc(tags=['Reviews List view'])
 class ReviewResourceList(MethodResource):
