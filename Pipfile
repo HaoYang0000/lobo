@@ -7,6 +7,10 @@ name = "pypi"
 
 [packages]
 flask = "*"
+flask-sqlalchemy = "*"
+alembic = "*"
+marshmallow-sqlalchemy = "*"
+click = "*"
 
 [requires]
 python_version = "3.6"
