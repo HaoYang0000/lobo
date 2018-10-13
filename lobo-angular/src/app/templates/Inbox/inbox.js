@@ -1,5 +1,6 @@
-export class GuidesComponent {
+export class InboxComponent {
     constructor () {
+        console.log('Yoooo');
     }
     $onInit () {
 
@@ -11,8 +12,8 @@ export class GuidesComponent {
         return {
             bindings: {
             },
-            controller: GuidesComponent,
-            template: require('./guides.html')
+            controller: InboxComponent,
+            template: require('./inbox.html')
         };
     }
 }

@@ -23,6 +23,14 @@
 body{
     font-family: 'Comfortaa', cursive;
 }
+h2{
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+h3{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
 .guide-slide{
     /*padding:10px;*/
 }
@@ -37,6 +45,9 @@ body{
     border: 3px solid #31394d;
     border-radius: 30px;
 }
+.guide-card.expert{
+    border-color:#009384;
+}
 .guide-carousel .guide-pic{
     width: 120px;
     border-radius: 100%;
@@ -45,8 +56,14 @@ body{
     background-size: contain;
     margin:auto;
 }
+.guide-carousel .expert .guide-pic{
+    border-color:#009384;
+}
 .guide-card .guide-rating i{
     color:#31394d;
+}
+.expert.guide-card .guide-rating i{
+    color:#009384;
 }
 .main-container{
     display:flex;
@@ -95,9 +112,16 @@ body{
 .sub-nav-item span{
     font-size:0.8rem;
 }
+a.sub-nav-item{
+    color:#fff;
+    text-decoration: none;
+}
 .sub-nav-item i{
     display:block;
 }
 .clear-margin{
+    margin:0px;
+}
+.card-title{
     margin:0px;
 }
