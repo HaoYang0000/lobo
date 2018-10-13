@@ -36,6 +36,7 @@ def run():
         host="127.0.0.1",
         port=8732
     )
+    return app
 
 
 @click.command()
