@@ -1,10 +1,12 @@
+
 export default class UserApi {
     constructor (Restangular) {
         this.rest = Restangular.service('users');
         this.auth = Restangular.service('auth');
     }
     list (params) {
-        return this.rest.get(params);
+        console.log('Listing guides. Query params==', params);
+        return this.rest.get(undefined, params);
     }
     retrieve (userId) {
         return this.rest.one(userId).get();

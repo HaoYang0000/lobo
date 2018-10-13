@@ -23,15 +23,15 @@ Entrepreneurship
     */
 export default class ServiceApi {
     constructor (Restangular) {
-        this.rest = Restangular.service('service');
+        this.rest = Restangular.service('services');
     }
-    list () {
-
+    list (params) {
+        this.rest.get(params);
     }
-    retrieve () {
-
+    retrieve (serviceType) {
+        this.rest.one(serviceType).get();
     }
     create () {
-
     }
+
 }
