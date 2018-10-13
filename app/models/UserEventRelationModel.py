@@ -22,12 +22,12 @@ class UserEventRelationModel(BaseModelExtended):
             "ServiceModel(\
                 id='{id}', \
                 user_id='{user_id}, \
-                service_id='{service_id} \
+                event_id='{event_id} \
                 ')"
         ).format(
             id=self.id,
             user_id=self.user_id,
-            service_id=self.service_id
+            event_id=self.event_id
         )
 
 class UserEventRelationModelSchema(BaseSchema):
