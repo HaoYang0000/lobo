@@ -36,9 +36,11 @@ def create_app(env=None):
 
     from app.views import index
     from app.views import users
+    from app.views import auth
 
     app.register_blueprint(index.app)
     app.register_blueprint(users.app)
+    app.register_blueprint(auth.app)
 
     # docs = FlaskApiSpec()
 
