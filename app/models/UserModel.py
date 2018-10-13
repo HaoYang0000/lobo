@@ -56,11 +56,18 @@ class UserModel(BaseModelExtended):
         mysql.VARCHAR(255),
         nullable=False
     )
+
+    is_guide = Column(
+        mysql.BOOLEAN,
+        nullable=False,
+        default=False
+    )
     
     def __repr__(self):
         return (
             "UserModel(\
                 id='{id}', \
+                is_guide='{is_guide}', \
                 user_name='{user_name}, \
                 password='{password}, \
                 first_name='{first_name}, \
@@ -84,7 +91,9 @@ class UserModel(BaseModelExtended):
             longitude=self.longitude,
             latitude=self.latitude,
             language_id=self.language_id,
+            is_guide=self.is_guide
         )
+
 
 class UserModelSchema(BaseSchema):
     id = fields.Integer(dump_only=True)
