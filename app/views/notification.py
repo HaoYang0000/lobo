@@ -27,12 +27,9 @@ class Notifcation(MethodResource):
         body = kwargs.get('body', None)
 
         if number is None or body is None:
-            return status.HTTP_404_NOT_FOUND
+            return status.HTTP_412_PRECONDITION_FAILED
 
-        print (number)
-        print (body)
         result = send_sms(to_number=number, body=body)
-        print (result)
         return result, status.HTTP_200_OK
 
 app.add_url_rule(
