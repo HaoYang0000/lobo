@@ -9,8 +9,10 @@ from app.services.db.UserController import UserService
 from app.services.db.UserEventController import UserEventService
 from app.models.ReviewModel import ReviewModel
 from app.models.UserEventRelationModel import UserEventRelationModel
+from app.models.UserServiceRelationModel import UserServiceRelationModel
 from app.services.db.EventController import EventService
 from app.services.db.ReviewController import ReviewService
+from app.services.db.ServiceController import ServiceService
 from app.models.EventModel import EventModel
 from app.util.db_tool import unrequire
 from libs.parameters import RequestParams
@@ -109,6 +111,22 @@ class UserReviewResourceList(MethodResource):
             result.append(self.review_service.get_by_id(review.event_id))
         return result, status.HTTP_200_OK
 
+@doc(tags=['Services associate with a user'])
+class UserServiceResourceList(MethodResource):
+    service_service = ServiceService()
+
+    @marshal_with(UserModelSchema(many=True), code=status.HTTP_200_OK)
+    @use_kwargs({
+        **RequestParams.pagination_params(),
+        **unrequire(UserModelSchema().fields)
+    })
+    @doc(description='return all reviews associate with a user')
+    def get(self, user_id, **kwargs):
+        service_ids = UserServiceRelationModel.query.filter(UserServiceRelationModel.user_id == user_id).all()
+        result = []
+        for service in service_ids:
+            result.append(self.service_service.get_by_id(service.service_id))
+        return result, status.HTTP_200_OK
 
 @doc(tags=['Users detail view'])
 class UserResourceDetail(MethodResource):
@@ -176,5 +194,10 @@ app.add_url_rule(
 app.add_url_rule(
     '/<int:user_id>/reviews',
     view_func=UserReviewResourceList.as_view('UserReviewResourceList'),
+    methods=['GET']
+)
+app.add_url_rule(
+    '/<int:user_id>/services',
+    view_func=UserServiceResourceList.as_view('UserServiceResourceList'),
     methods=['GET']
 )
