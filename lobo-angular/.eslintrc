@@ -85,7 +85,7 @@ rules:
   angular/angularelement:       2
   angular/on-destroy:           2
   angular/file-name:
-    - 2
+    - 0
     - typeSeparator:            dot
       nameStyle:                dash
       ignoreTypeSuffix:         'true'
