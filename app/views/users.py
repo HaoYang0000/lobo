@@ -6,6 +6,10 @@ from flask_api import status
 from flask_apispec import doc, marshal_with, use_kwargs
 from flask_apispec.views import MethodResource
 from app.services.db.UserController import UserService
+from app.services.db.UserEventController import UserEventService
+from app.models.UserEventRelationModel import UserEventRelationModel
+from app.services.db.EventController import EventService
+from app.models.EventModel import EventModel
 from app.util.db_tool import unrequire
 from libs.parameters import RequestParams
 from libs.security import get_token_info
@@ -69,22 +73,23 @@ class UsersNearbyResourceList(MethodResource):
 
 @doc(tags=['Events associate with user'])
 class UserEventResourceList(MethodResource):
-    user_service = UserService()
+    user_event_service = UserEventService()
+    event_service = EventService()
 
     @marshal_with(UserModelSchema(many=True), code=status.HTTP_200_OK)
     @use_kwargs({
         **RequestParams.pagination_params(),
         **unrequire(UserModelSchema().fields)
     })
-    @doc(description='return all nearby guides')
-    def get(self, **kwargs):
-        uid = kwargs.pop('uid')
-        page = kwargs.pop('page')
-        limit = kwargs.pop('limit')
+    @doc(description='return all events associate with a user')
+    def get(self, user_id, **kwargs):
+        event_ids = UserEventRelationModel.query.filter(UserEventRelationModel.user_id == user_id).all()
+        result = []
 
-        return self.user_service.get_multiple_nearby(
-            uid=uid,
-        ), status.HTTP_200_OK
+        for event in event_ids:
+            result.append(self.event_service.get_by_id(event.event_id))
+
+        return result, status.HTTP_200_OK
 
 @doc(tags=['Users detail view'])
 class UserResourceDetail(MethodResource):
