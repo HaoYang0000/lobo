@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/preboot/angularjs-webpack",
   "dependencies": {
+    "@uirouter/angularjs": ">=1.0.20",
     "angular": "^1.7.0",
     "restangular": ">=1.6.1"
   },
@@ -32,6 +33,8 @@
     "babel-preset-es2015": "^6.1.18",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
+    "eslint": ">=5.x.x",
+    "eslint-plugin-html": ">=4.x.x",
     "extract-text-webpack-plugin": "2.0.0-beta.5",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
@@ -52,6 +55,18 @@
     "rimraf": "^2.5.1",
     "style-loader": "^0.21.0",
     "webpack": "^2.7.0",
-    "webpack-dev-server": "^2.11.2"
+    "webpack-dev-server": "^2.11.2",
+    "eslint-config-angular": ">=0.x.x",
+    "eslint-config-standard": ">=11.x.x",
+    "eslint-find-rules": ">=3.x.x",
+    "eslint-plugin-angular": ">=3.x.x",
+    "eslint-plugin-eslint-comments": ">=3.x.x",
+    "eslint-plugin-import": ">=2.x.x",
+    "eslint-plugin-jasmine": ">=2.x.x",
+    "eslint-plugin-json": ">=1.x.x",
+    "eslint-plugin-no-loops": ">=0.x.x",
+    "eslint-plugin-node": ">=7.x.x",
+    "eslint-plugin-promise": ">=3.x.x",
+    "eslint-plugin-standard": ">=3.x.x"
   }
 }
