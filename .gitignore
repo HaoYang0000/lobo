@@ -1,3 +1,10 @@
 .pyc
 .idea/
 config/*.json
+*.DS_STORE
+*.swp
+/node_modules
+
+# Charlie's local stuff
+.python-version
+.env.fish
