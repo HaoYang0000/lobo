@@ -19,16 +19,42 @@ class UserModel(BaseModelExtended):
 
     first_name = Column(
         mysql.VARCHAR(255),
-        nullable=False
+        nullable=True
     )
 
     last_name = Column(
         mysql.VARCHAR(255),
-        nullable=False
+        nullable=True
+    )
+
+    birthday = Column(
+        mysql.VARCHAR(255),
+        nullable=True
     )
 
     phone = Column(
         mysql.VARCHAR(255),
+        nullable=False
+    )
+
+    address = Column(
+        mysql.VARCHAR(255),
+        nullable=False
+    )
+
+    longitude = Column(
+        mysql.FLOAT,
+        nullable=True
+    )
+
+    latitude = Column(
+        mysql.FLOAT,
+        nullable=True
+    )
+
+    language_id = Column(
+        mysql.INTEGER(unsigned=True, display_width=11),
+        autoincrement=True,
         nullable=False
     )
     
@@ -40,7 +66,12 @@ class UserModel(BaseModelExtended):
                 password='{password}, \
                 first_name='{first_name}, \
                 last_name='{last_name}, \
-                phone='{phone} \
+                phone='{phone}, \
+                birthday='{birthday}, \
+                address='{address}, \
+                longitude='{longitude}, \
+                latitude='{latitude}, \
+                language_id='{language_id}' \
                 ')"
         ).format(
             id=self.id,
@@ -48,9 +79,13 @@ class UserModel(BaseModelExtended):
             password=self.password,
             first_name=self.first_name,
             last_name=self.last_name,
-            phone=self.phone
+            phone=self.phone,
+            birthday=self.birthday,
+            address=self.address,
+            longitude=self.longitude,
+            latitude=self.latitude,
+            language_id=self.language_id,
         )
-
 
 class UserModelSchema(BaseSchema):
     id = fields.Integer(dump_only=True)
