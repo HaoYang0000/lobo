@@ -1,8 +1,8 @@
 """Add user_id_two for event
 
-Revision ID: f31e620a4453
+Revision ID: b8111244756b
 Revises: 10d6e3910967
-Create Date: 2018-10-14 02:35:28.711315
+Create Date: 2018-10-14 03:59:13.097314
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import mysql
 
 # revision identifiers, used by Alembic.
-revision = 'f31e620a4453'
+revision = 'b8111244756b'
 down_revision = '10d6e3910967'
 branch_labels = None
 depends_on = None
@@ -22,9 +22,11 @@ def upgrade():
                existing_type=mysql.TINYINT(display_width=1),
                type_=sa.BOOLEAN(),
                existing_nullable=True)
-    op.drop_index('fk_user_event_id1', table_name='user_event')
-    op.create_foreign_key('fk_user_event_id4', 'user_event', 'users', ['user_id_one'], ['id'])
+    op.add_column('user_event', sa.Column('user_id_one', mysql.INTEGER(display_width=11, unsigned=True), nullable=True))
+    op.add_column('user_event', sa.Column('user_id_two', mysql.INTEGER(display_width=11, unsigned=True), nullable=True))
+    op.drop_constraint('fk_user_event_id1', 'user_event', type_='foreignkey')
     op.create_foreign_key('fk_user_event_id3', 'user_event', 'users', ['user_id_two'], ['id'])
+    op.create_foreign_key('fk_user_event_id4', 'user_event', 'users', ['user_id_one'], ['id'])
     op.drop_column('user_event', 'user_id')
     op.alter_column('user_service', 'is_expert',
                existing_type=mysql.TINYINT(display_width=1),
@@ -48,9 +50,11 @@ def downgrade():
                type_=mysql.TINYINT(display_width=1),
                existing_nullable=False)
     op.add_column('user_event', sa.Column('user_id', mysql.INTEGER(display_width=11, unsigned=True), autoincrement=False, nullable=True))
-    op.drop_constraint('fk_user_event_id3', 'user_event', type_='foreignkey')
     op.drop_constraint('fk_user_event_id4', 'user_event', type_='foreignkey')
-    op.create_index('fk_user_event_id1', 'user_event', ['user_id'], unique=False)
+    op.drop_constraint('fk_user_event_id3', 'user_event', type_='foreignkey')
+    op.create_foreign_key('fk_user_event_id1', 'user_event', 'users', ['user_id'], ['id'])
+    op.drop_column('user_event', 'user_id_two')
+    op.drop_column('user_event', 'user_id_one')
     op.alter_column('conversations', 'is_read',
                existing_type=sa.BOOLEAN(),
                type_=mysql.TINYINT(display_width=1),
