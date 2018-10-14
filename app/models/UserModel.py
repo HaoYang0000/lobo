@@ -105,6 +105,7 @@ class UserModelSchema(BaseSchema):
 
 
 class UserAuthSchema(BaseSchema):
+    jwt = fields.String()
 
     class Meta(BaseMeta):
         model = UserModel
