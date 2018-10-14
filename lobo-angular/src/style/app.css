@@ -287,6 +287,7 @@ button.login-btn {
   border-radius: 40px !important;
   background-color: black !important;
   color: white !important;
+  width: 100%;
 }
 
 .login-logo-container {

@@ -1,5 +1,15 @@
 export default function StateConfig ($stateProvider) {
     $stateProvider
+        .state('splash',
+            {
+                name: 'splash',
+                url: '^/',
+                views: {
+                    'index': {
+                        template: '</lobo-splash/>'
+                    }
+                }
+            })
         .state('home',
             {
                 name: 'home',
@@ -12,15 +22,15 @@ export default function StateConfig ($stateProvider) {
                 resolve: {
                     login: function ($q, $state, $timeout, UserApi) {
                         let deferred = $q.defer();
-                        $timeout(()=>{
-                        if (!UserApi.data || !UserApi.token) {
-                            $state.go('login', {loginError: true});
-                            deferred.reject();
-                        }else{
-                            deferred.resolve();
-                        }
-                    });
-                    return deferred.promise;
+                        $timeout(() => {
+                            if (!UserApi.data || !UserApi.token) {
+                                $state.go('login', { loginError: true });
+                                deferred.reject();
+                            } else {
+                                deferred.resolve();
+                            }
+                        });
+                        return deferred.promise;
                     }
                 }
             }
@@ -91,6 +101,33 @@ export default function StateConfig ($stateProvider) {
                 views: {
                     'index': {
                         template: '<lobo-login/>'
+                    }
+                }
+            })
+        .state('login.loading',
+            {
+                name: 'loading',
+                url: '/loading/',
+                params: {
+                    loginData: null
+                },
+                views: {
+                    'index': {
+                        template: '<lobo-loading/>'
+                    }
+                }
+            }
+        )
+        .state('register',
+            {
+                name: 'register',
+                url: '^/register/',
+                params: {
+                    registerError: null
+                },
+                views: {
+                    'index': {
+                        template: '<lobo-register/>'
                     }
                 }
             });

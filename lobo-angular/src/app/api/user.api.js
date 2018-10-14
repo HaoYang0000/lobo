@@ -1,7 +1,7 @@
 
 export default class UserApi {
-
-    constructor (Restangular) {
+    constructor (Restangular, $timeout) {
+        this.$timeout = $timeout;
         this.Restangular = Restangular;
         this.rest = Restangular.service('users');
         this.auth = Restangular.service('auth');
@@ -46,5 +46,12 @@ export default class UserApi {
         });
         this.data = userdata;
         return userdata;
+    }
+    async register (registerData) {
+        let data = await this.$timeout(
+            (registerData) => { console.log('Registration complete'); return this.login({ phone: '3140000000', password: 'catgif' }); }, 1000);
+        console.log(data);
+        return data;
+        // let registerData = await this.users.post(data);
     }
 }

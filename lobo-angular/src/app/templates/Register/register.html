@@ -1,0 +1,52 @@
+<div class='main-container login-background'>
+  <div class="login-logo-container" style="height: 35% !important;">
+    <img class="login-logo" src="/img/logo.png">
+  </div>
+    <form class='login-form'>
+      <div name="$ctrl.registerForm" class="form-group">
+        <!-- <label for="usernameInput">Username</label> -->
+        <div class="form-group">
+          <input ng-required ng-model="$ctrl.registerForm.firstName"
+      type="text"
+       class="form-control login-form-input" id="firstNameInput" aria-describedby="emailHelp" placeholder="First Name">
+       </div>
+          <div class="form-group">
+            <input ng-required ng-model="$ctrl.registerForm.lastName"
+     type="text"
+      class="form-control login-form-input" id="lastNameInput" aria-describedby="emailHelp" placeholder="Last Number">
+      </div>
+            <div class="form-group">
+              <input ng-required ng-model="$ctrl.registerForm.username"
+      type="tel"
+       class="form-control login-form-input" id="usernameInput" aria-describedby="emailHelp" placeholder="Phone Number">
+       </div>
+              <!-- <small id="emailHelp" class="form-text text-muted">Enter username</small> -->
+              <div class="form-group">
+                <!-- <label for="passwordInput">Password</label> -->
+                <input ng-required ng-model="$ctrl.registerForm.password" type="password" class="form-control login-form-input" id="passwordInput" placeholder="Password">
+  </div>
+
+                <button ng-disabled="$ctrl.loginSuccessful" type="submit" ng-click="$ctrl.register();" class="btn login-btn">Register</button>
+    </form>
+  </div>
+
+  <button id="#showErrorModal" style="display: none;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginErrorModal"/>
+  <div id="loginErrorModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" ng-click="$ctrl.hideModal()"data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+</div>
+<div class="modal-body">
+  <p>Invalid registration data.</p>
+</div>
+<div class="modal-footer">
+
+  <button type="button" class="btn btn-secondary" ng-click="$ctrl.hideModal()" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
+</div>
