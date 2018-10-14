@@ -110,3 +110,27 @@ class UserAuthSchema(BaseSchema):
         model = UserModel
         exclude = ['hashed_password']
         dump_only = ['id', 'jwt']
+
+class UserServiceSchema(BaseSchema):
+    name = fields.String(dump_only=True)
+
+    class Meta(BaseMeta):
+        model = UserModel
+        exclude = ['hashed_password']
+
+class UserEventSchema(BaseSchema):
+    name = fields.String(dump_only=True)
+    status = fields.String(dump_only=True)
+
+    class Meta(BaseMeta):
+        model = UserModel
+        exclude = ['hashed_password']
+
+class UserReviewSchema(BaseSchema):
+    rate = fields.Integer(dump_only=True)
+    text = fields.String(dump_only=True)
+
+    class Meta(BaseMeta):
+        model = UserModel
+        exclude = ['hashed_password']
+

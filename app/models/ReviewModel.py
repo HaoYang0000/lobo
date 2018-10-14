@@ -24,11 +24,11 @@ class ReviewModel(BaseModelExtended):
 
     def __repr__(self):
         return (
-            "EventModel(\
+            "ReviewModel(\
                 id='{id}', \
                 text='{text}, \
                 rate='{rate}, \
-                user_id='{event_id} \
+                user_id='{user_id} \
                 ')"
         ).format(
             id=self.id,

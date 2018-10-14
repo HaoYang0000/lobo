@@ -1,6 +1,6 @@
 import logging
 
-from app.models.UserModel import UserModelSchema
+from app.models.UserModel import UserModelSchema, UserServiceSchema, UserEventSchema, UserReviewSchema
 from flask import Blueprint, abort, make_response
 from flask_api import status
 from flask_apispec import doc, marshal_with, use_kwargs
@@ -80,7 +80,7 @@ class UserEventResourceList(MethodResource):
     user_event_service = UserEventService()
     event_service = EventService()
 
-    @marshal_with(UserModelSchema(many=True), code=status.HTTP_200_OK)
+    @marshal_with(UserEventSchema(many=True), code=status.HTTP_200_OK)
     @use_kwargs({
         **RequestParams.pagination_params(),
         **unrequire(UserModelSchema().fields)
@@ -90,7 +90,8 @@ class UserEventResourceList(MethodResource):
         event_ids = UserEventRelationModel.query.filter(UserEventRelationModel.user_id == user_id).all()
         result = []
         for event in event_ids:
-            result.append(self.event_service.get_by_id(event.event_id))
+            model = self.event_service.get_by_id(event.event_id)
+            result.append(model)
         return result, status.HTTP_200_OK
 
 @doc(tags=['Reviews associate with user'])
@@ -98,7 +99,7 @@ class UserReviewResourceList(MethodResource):
     user_event_service = UserEventService()
     review_service = ReviewService()
 
-    @marshal_with(UserModelSchema(many=True), code=status.HTTP_200_OK)
+    @marshal_with(UserReviewSchema(many=True), code=status.HTTP_200_OK)
     @use_kwargs({
         **RequestParams.pagination_params(),
         **unrequire(UserModelSchema().fields)
@@ -108,14 +109,15 @@ class UserReviewResourceList(MethodResource):
         review_ids = ReviewModel.query.filter(ReviewModel.user_id == user_id).all()
         result = []
         for review in review_ids:
-            result.append(self.review_service.get_by_id(review.event_id))
+            model = self.review_service.get_by_id(review.id)
+            result.append(model)
         return result, status.HTTP_200_OK
 
 @doc(tags=['Services associate with a user'])
 class UserServiceResourceList(MethodResource):
     service_service = ServiceService()
 
-    @marshal_with(UserModelSchema(many=True), code=status.HTTP_200_OK)
+    @marshal_with(UserServiceSchema(many=True), code=status.HTTP_200_OK)
     @use_kwargs({
         **RequestParams.pagination_params(),
         **unrequire(UserModelSchema().fields)
@@ -124,8 +126,9 @@ class UserServiceResourceList(MethodResource):
     def get(self, user_id, **kwargs):
         service_ids = UserServiceRelationModel.query.filter(UserServiceRelationModel.user_id == user_id).all()
         result = []
-        for service in service_ids:
-            result.append(self.service_service.get_by_id(service.service_id))
+        for service in service_ids: 
+            model = self.service_service.get_by_id(service.service_id)
+            result.append(model)
         return result, status.HTTP_200_OK
 
 @doc(tags=['Users detail view'])

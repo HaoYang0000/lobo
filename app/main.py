@@ -50,6 +50,7 @@ def create_app(env=None, start_response=None):
     app.register_blueprint(auth.app)
     app.register_blueprint(notification.app)
     app.register_blueprint(services.app)
+    app.register_blueprint(event.app)
     app.register_blueprint(review.app)
 
     db.init_app(app)
