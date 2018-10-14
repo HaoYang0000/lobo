@@ -26,7 +26,7 @@ export default class ServiceApi {
         this.rest = Restangular.service('services');
     }
     list (params) {
-        this.rest.get(params);
+        this.rest.get(undefined,params);
     }
     retrieve (serviceType) {
         this.rest.one(serviceType).get();

@@ -102,21 +102,7 @@ def upgrade():
                 'is_guide': True
             })
         # test user
-        first_name = "test"
-        user_list.append({
-                'id' : 8,
-                'user_name': 'test',
-                'password': 'test',
-                'first_name': first_name,
-                'last_name': fake.last_name_female(),
-                'birthday': fake.date_of_birth(),
-                'phone': fake.phone_number(),
-                'address': fake.address(),
-                'latitude': fake.latitude(),
-                'longitude': fake.longitude(),
-                'language': random.choice(language_list),
-                'is_guide': True
-            })
+
         
         
     print (user_list)

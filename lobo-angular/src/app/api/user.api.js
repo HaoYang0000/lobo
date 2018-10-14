@@ -4,9 +4,11 @@ export default class UserApi {
         this.rest = Restangular.service('users');
         this.auth = Restangular.service('auth');
     }
-    list (params) {
+    async list (params) {
         console.log('Listing guides. Query params==', params);
-        return this.rest.get(undefined, params);
+        let res = await this.rest.get('', params);
+        console.log(res.plain());
+        return res.plain();
     }
     retrieve (userId) {
         return this.rest.one(userId).get();

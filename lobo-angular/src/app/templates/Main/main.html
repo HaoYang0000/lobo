@@ -1,33 +1,34 @@
 <div class="main-container">
     <div class="top-container">
         <h1 class="logo clear-margin">Lobo</h1>
-        <div class="profile-picture" style="background-image: url('/img/miguel.jpg')">
+        <div>
 
+            <a class="sub-nav-item" ui-sref="search">
+                <i class="fas fa-search"></i>
+            </a>
+            <div class="profile-picture" style="background-image: url('/img/miguel.jpg')">
+            </div>
         </div>
+
     </div>
     <div class="center-container">
         <ui-view></ui-view>
     </div>
     <div class="bottom-container">
-        <div class="row">
-            <div class="col">
-                <a class="sub-nav-item" ui-sref="home.inbox">
-                    <i class="fas fa-comment-alt"></i>
-                    <span>Inbox</span>
-                </a>
-            </div>
-            <div class="col">
-                <a class="sub-nav-item" ui-sref="home.guides">
-                    <i class="fas fa-search"></i>
-                    <span>Get Help</span>
-                </a>
-            </div>
-            <div class="col">
-                <a class="sub-nav-item" ui-sref="home.appointments">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>Appointments</span>
-                </a>
-            </div>
+        <div class="">
+            <a class="sub-nav-item" ui-sref="home.inbox">
+                <i class="fas fa-comment-alt"></i>
+            </a>
+        </div>
+        <div class="">
+            <a class="sub-nav-item" ui-sref="home.guides">
+                <i class="fas fa-home"></i>
+            </a>
+        </div>
+        <div class="">
+            <a class="sub-nav-item" ui-sref="home.appointments">
+                <i class="fas fa-calendar-alt"></i>
+            </a>
         </div>
     </div>
 </div>
