@@ -17,17 +17,32 @@ class ConversationModel(BaseModelExtended):
         ForeignKey('users.id', name='fk_conversation_user_id_two')
     )
 
+    content = Column(
+        mysql.VARCHAR(255),
+        nullable=True
+    )
+
+    is_read = Column(
+        mysql.BOOLEAN,
+        nullable=True,
+        default=False
+    )
+
     def __repr__(self):
         return (
             "ConversationModel(\
                 id='{id}', \
                 user_id_one='{user_id_one}, \
-                user_id_two='{user_id_two} \
+                user_id_two='{user_id_two}, \
+                content='{content}, \
+                is_read='{is_read}\
                 ')"
         ).format(
             id=self.id,
             user_id_one=self.user_id_one,
-            user_id_two=self.user_id_two
+            user_id_two=self.user_id_two,
+            content=self.content,
+            is_read=self.is_read
         )
 
 class ConversationModelSchema(BaseSchema):

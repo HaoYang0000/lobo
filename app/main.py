@@ -44,6 +44,7 @@ def create_app(env=None, start_response=None):
     from app.views import services
     from app.views import event
     from app.views import review
+    from app.views import conversation
 
     app.register_blueprint(index.app)
     app.register_blueprint(users.app)
@@ -52,6 +53,7 @@ def create_app(env=None, start_response=None):
     app.register_blueprint(services.app)
     app.register_blueprint(event.app)
     app.register_blueprint(review.app)
+    app.register_blueprint(conversation.app)
 
     db.init_app(app)
 
