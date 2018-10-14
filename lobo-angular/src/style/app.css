@@ -39,6 +39,11 @@ h3{
     border-radius: 40px;
     font-weight:bold;
 }
+.center-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .back-button{
     float:left;
 }
@@ -227,4 +232,15 @@ a.sub-nav-item{
     background-size: contain;
     border:3px solid #31394d;
     border-radius: 100%;
+}
+.schedule-entry{
+    margin-top:20px;
+    text-align: center;
+}
+.schedule-entry select{
+    margin-top:10px;
+}
+.bottom-cta{
+    margin-top:40px;
+    text-align: center;
 }

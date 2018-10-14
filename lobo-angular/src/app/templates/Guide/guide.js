@@ -8,7 +8,7 @@ export class GuideComponent {
             this.guide = data;
             $scope.guide = data;
             $scope.$apply();
-            $state.go('guide.profile');
+            $state.go('guide.profile',{guide:this.guide});
             $scope.$state = $state;
         }).catch((err)=>{
             console.log(err);
