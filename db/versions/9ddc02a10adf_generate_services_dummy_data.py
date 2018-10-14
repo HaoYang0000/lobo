@@ -1,8 +1,8 @@
 """Generate services dummy data
 
-Revision ID: bf38b68cd16a
-Revises: 5f831dc77284
-Create Date: 2018-10-13 22:15:40.189157
+Revision ID: 9ddc02a10adf
+Revises: 369cd365eefd
+Create Date: 2018-10-13 22:29:34.943215
 
 """
 from alembic import op
@@ -12,8 +12,8 @@ from sqlalchemy.sql import table, column
 from sqlalchemy import String, Integer, Date, Float, Boolean
 
 # revision identifiers, used by Alembic.
-revision = 'bf38b68cd16a'
-down_revision = '5f831dc77284'
+revision = '9ddc02a10adf'
+down_revision = '369cd365eefd'
 branch_labels = None
 depends_on = None
 
@@ -44,8 +44,6 @@ def upgrade():
         {'category': 'Entrepreneurship', 'name':'Legal Assistance'},
         {'category': 'Entrepreneurship', 'name':'Marketing'}
     ])
-    
-    # ### end Alembic commands ###
 
 
 def downgrade():
