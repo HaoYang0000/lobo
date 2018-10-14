@@ -29,7 +29,7 @@ export class LoginComponent {
         return {
             bindings: {},
             controller: LoginComponent,
-            template: require('./login.js')
+            template: require('./login.html')
         };
     }
 }
