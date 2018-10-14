@@ -76,7 +76,17 @@ export default function StateConfig ($stateProvider) {
                 }
             }
         }
-    );
+    ).state('login',
+        {
+            name: 'login',
+            url: '^/login/',
+            views: {
+                'index': {
+                    template: '<lobo-login/>'
+                }
+            }
+        });
+
 
 
 
