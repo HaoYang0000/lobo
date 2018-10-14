@@ -1,5 +1,7 @@
+
 export class HomeComponent {
     constructor (UserApi) {
+        console.log('home component');
 
     }
     $onInit () {
@@ -13,7 +15,7 @@ export class HomeComponent {
             bindings: {
             },
             controller: HomeComponent,
-            template: require('./main.html')
+            template: require('./home.html')
         };
     }
 }
