@@ -7,6 +7,11 @@ from sqlalchemy.dialects import mysql
 class ServiceModel(BaseModelExtended):
     __tablename__ = 'services'
 
+    category = Column(
+        mysql.VARCHAR(255),
+        nullable=False
+    )
+
     name = Column(
         mysql.VARCHAR(255),
         nullable=False
@@ -16,10 +21,12 @@ class ServiceModel(BaseModelExtended):
         return (
             "ServiceModel(\
                 id='{id}', \
-                name='{name} \
+                category='{category}' ,\
+                name='{name}, \
                 ')"
         ).format(
             id=self.id,
+            category=self.category,
             name=self.name
         )
 
