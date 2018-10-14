@@ -1,6 +1,6 @@
 import UserApi from "../../api/user.api";
 export class GuideComponent {
-    constructor (UserApi,$stateParams,$scope) {
+    constructor (UserApi,$stateParams,$scope,$state) {
         console.log($stateParams)
         this.userId=$stateParams.userId;
         this.api = UserApi;
@@ -8,12 +8,14 @@ export class GuideComponent {
             this.guide = data;
             $scope.guide = data;
             $scope.$apply();
+            $state.go('guide.profile');
+            $scope.$state = $state;
         }).catch((err)=>{
             console.log(err);
         });
     }
     $onInit () {
-        console.log(this)
+
     }
     $onDestroy () {
 
