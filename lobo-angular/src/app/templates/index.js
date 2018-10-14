@@ -13,6 +13,8 @@ import {ConversationComponent} from "./Conversation/conversation";
 import {MessageComponent} from "./Message/message";
 import { LoginComponent } from './Login/login';
 import { RegisterComponent } from './Register/register';
+import { AppointmentsComponent } from './Appointments/appointments';
+import { AppointmentCardComponent } from './AppointmentCard/appointment-card';
 
 
 export default angular.module('lobo.components', [])
@@ -28,4 +30,6 @@ export default angular.module('lobo.components', [])
     .component('loboGuideProfile', GuideProfileComponent.create())
     .component('loboConversation', ConversationComponent.create())
     .component('loboMessage', MessageComponent.create())
+    .component('loboAppointments', AppointmentsComponent.create())
+    .component('loboAppointmentCard', AppointmentCardComponent.create())
     .name;

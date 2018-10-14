@@ -403,3 +403,19 @@ div.lang-select > ul > li.list-group-item.active {
   flex:4;
   padding:5px;
 }
+.appointment-card{
+  border:8px solid #31394d;
+  border: 8px solid #31394d;
+  border-radius: 10px;
+  margin: 20px 10px;
+  padding: 10px;
+  text-align: center;
+}
+.appointment-card .profile-picture{
+  height: 40px;
+  width: 40px;
+  background-size: contain;
+  border-radius: 100%;
+  border: 3px solid #31394d;
+  display: inline-block;
+}

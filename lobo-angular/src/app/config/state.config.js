@@ -38,6 +38,16 @@ export default function StateConfig ($stateProvider) {
                 }
             }
         }
+    ).state('home.appointments',
+        {
+            name: 'home.appointments',
+            url: '^/',
+            views: {
+                'center@home': {
+                    template: '<lobo-appointments/>'
+                }
+            }
+        }
     ).state('guide',
         {
             name: 'guide',
