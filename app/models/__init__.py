@@ -5,6 +5,5 @@ from app.models import (
     EventModel,
     UserEventRelationModel,
     ReviewModel,
-    Conversation,
-    ConversationContent
+    Conversation
 )
