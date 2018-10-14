@@ -150,7 +150,7 @@ def token():
 @click.option('--user-id', default=-1)
 def test_token(user_id):
     JWTConfig()
-    JWTConfig.jwt_exp_seconds = 900  # 15 minutes
+    JWTConfig.jwt_exp_seconds = 90000000  # 15 minutes + however many 0's after
     click.echo(create_token(user_id=user_id))
 
 

@@ -8,7 +8,7 @@ export default function StateConfig ($stateProvider) {
     ).state(
         {
             name: 'home.inbox',
-            url: '/inbox/',
+            url: '/',
             template: '<lobo-inbox/>'
         }
     ).state(
@@ -16,6 +16,19 @@ export default function StateConfig ($stateProvider) {
             name: 'home.guides',
             url:'/',
             template: '<lobo-guides/>'
+        }
+    ).state(
+        {
+            name: 'guide',
+            url:'/guide/:userId',
+            template: '<lobo-guide/>'
+        }
+    ).state(
+        {
+            name: 'conversation',
+            // url:'/conversation/:conversationId',
+            url:'/',
+            template: '<lobo-guide/>'
         }
     );
 }
