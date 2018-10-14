@@ -104,8 +104,6 @@ def upgrade():
         # test user
 
         
-        
-    print (user_list)
     op.bulk_insert(my_table,
         user_list
     )
