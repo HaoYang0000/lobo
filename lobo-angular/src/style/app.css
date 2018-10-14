@@ -294,15 +294,18 @@ button.login-btn {
 
 .login-logo-container {
   width: 100%;
-  height: 40%;
+  height: 35%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   /* padding: 20px; */
   /* flex: 1 1 auto; */
   position: relative;
+  transition: height 0.5s linear;
 }
-
+.login-logo-container.small {
+    height: 18%;
+}
 .login-logo {
   background-image: url(http://localhost:8080/img/logo.png);
   width: auto;
@@ -364,6 +367,20 @@ button.login-btn {
   vertical-align: middle;
   display: flex;
   justify-self: center;
+}
+div.lang-select > ul {
+    margin-bottom: 20px;
+}
+div.lang-select > ul > li.list-group-item:active{
+    background-color: #0000009e;
+    color: white;
+}
+div.lang-select > ul > li.list-group-item {
+    text-align:center;
+}
+div.lang-select > ul > li.list-group-item.active {
+    background-color: black;
+    color: white;
 }
 .message{
   margin: 20px 10px;
