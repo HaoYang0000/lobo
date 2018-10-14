@@ -1,8 +1,7 @@
 
 export class GuideProfileComponent {
     constructor (UserApi,$stateParams,$scope,$state) {
-        $scope.backHref=$state.href('home.guides');
-        console.log($scope.backHref)
+        console.log($scope)
     }
     $onInit () {
 

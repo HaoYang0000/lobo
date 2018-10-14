@@ -6,7 +6,11 @@ export class GuidesComponent {
         this.api = UserApi;
         this.api.list().then((guides) => {
             $scope.guides = guides;
-            console.log($scope);
+            angular.forEach(guides,(guide)=>{
+                this.api.retrieve(guide.id,'services').then((data)=>{
+                    console.log(data)
+                })
+            })
             $scope.$apply();
         }).catch((err) => {
             console.log(err);
