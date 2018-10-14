@@ -1,17 +1,7 @@
 <div class="inbox">
     <div class="conversation-list">
 
-        <lobo-conv-card></lobo-conv-card>
-        <lobo-conv-card></lobo-conv-card>
-        <lobo-conv-card></lobo-conv-card>
-        <lobo-conv-card></lobo-conv-card>
-        <lobo-conv-card></lobo-conv-card>
-        <lobo-conv-card></lobo-conv-card>
-        <lobo-conv-card></lobo-conv-card>
-        <lobo-conv-card></lobo-conv-card>
-        <lobo-conv-card></lobo-conv-card>
-        <lobo-conv-card></lobo-conv-card>
-        <lobo-conv-card></lobo-conv-card>
+        <lobo-conv-card ng-repeat="convo in convos" convo="convo"></lobo-conv-card>
 
     </div>
 </div>

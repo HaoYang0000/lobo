@@ -10,6 +10,7 @@ import {ConversationCardComponent} from "./ConversationCard/conversation-card";
 import {GuideCardComponent} from "./GuideCard/guide-card";
 import {GuideProfileComponent} from "./GuideProfile/guide-profile";
 import {ConversationComponent} from "./Conversation/conversation";
+import {MessageComponent} from "./Message/message";
 import { LoginComponent } from './Login/login';
 
 
@@ -24,4 +25,5 @@ export default angular.module('lobo.components', [])
     .component('loboGuideRequest', GuideRequestComponent.create())
     .component('loboGuideProfile', GuideProfileComponent.create())
     .component('loboConversation', ConversationComponent.create())
+    .component('loboMessage', MessageComponent.create())
     .name;

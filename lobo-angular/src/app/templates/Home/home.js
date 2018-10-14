@@ -1,8 +1,8 @@
 
 export class HomeComponent {
-    constructor (UserApi) {
+    constructor (UserApi,$state) {
         console.log('home component');
-
+        $state.go('home.guides')
     }
     $onInit () {
 

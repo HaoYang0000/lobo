@@ -1,7 +1,14 @@
 export class ConversationCardComponent {
-    constructor () {
+    constructor ($scope, UserApi) {
+        this.UserApi = UserApi;
+        this.$scope = $scope;
     }
-    $onInit () {
+    $onInit ($scope) {
+        this.UserApi.retrieve(this.convo.id).then((user)=>{
+            this.convo.user=user;
+            this.$scope.$apply();
+            console.log(this.convo)
+        })
 
     }
     $onDestroy () {
@@ -10,6 +17,7 @@ export class ConversationCardComponent {
     static create () {
         return {
             bindings: {
+                convo:'=',
             },
             controller: ConversationCardComponent,
             template: require('./conversation-card.html')

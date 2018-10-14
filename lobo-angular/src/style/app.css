@@ -20,7 +20,9 @@
 body {
   font-family: 'Comfortaa', cursive;
 }
-
+textarea:focus, input:focus{
+  outline: none;
+}
 h2 {
   font-size: 1.6rem;
   font-weight: bold;
@@ -107,7 +109,7 @@ h3 {
   color: #009384;
 }
 
-.main-container, .profile-container {
+.main-container, .profile-container, .convo-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -143,7 +145,7 @@ h3 {
   background: #d0f6ff;
 }
 
-.profile-container .top-container {
+.profile-container .top-container,.convo-container .top-container {
   background: #31394d;
   color: #fff;
   justify-content: center;
@@ -151,12 +153,12 @@ h3 {
   padding-bottom: 10px;
 }
 
-.profile-container .top-container .details {
+.profile-container .top-container .details,.convo-container .top-container .details {
   width: 100%;
   text-align: center;
 }
 
-.profile-container .top-container a.back-button {
+.profile-container .top-container a.back-button,.convo-container .top-container a.back-button {
   float: left;
   font-size: 1.2rem;
   color: #fff;
@@ -361,4 +363,25 @@ button.login-btn {
   vertical-align: middle;
   display: flex;
   justify-self: center;
+}
+.message{
+  margin: 20px 10px;
+
+  background: #31394d;
+  border-radius:5px;
+  padding:10px;
+  color:#fff;
+  max-width:80%;
+  float:left;
+}
+.message.is-sender{
+  float:right;
+  background:#d0f6ff;
+  color:#31394d;
+}
+.convo-container .bottom-container input{
+  border-radius:40px;
+  border:none;
+  flex:4;
+  padding:5px;
 }

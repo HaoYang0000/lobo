@@ -30,7 +30,7 @@ export default function StateConfig ($stateProvider) {
     ).state('home.guides',
         {
             name: 'home.guides',
-            url: '^/guides/',
+            url: '^/',
             views: {
                 'center@home': {
                     template: '<lobo-guides/>'
@@ -68,12 +68,14 @@ export default function StateConfig ($stateProvider) {
         }
         ).state('conversation',
         {
-            name: 'conversation',
-            url: '^/conversation/:userId',
+            // url: '^/conversation/:userId',
             views: {
                 'index': {
                     template: '<lobo-conversation/>'
                 }
+            },
+            params: {
+                convo: { value: {} }
             }
         }
     ).state('login',
