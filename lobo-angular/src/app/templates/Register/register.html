@@ -4,7 +4,7 @@
   </div>
     <form class='login-form'>
       <div ng-form name="regForm" class="form-group">
-        <div ng-if="$ctrl.step === 1;">
+        <div class="fade" ng-class="{'show': $ctrl.step === 1}"ng-if="$ctrl.step === 1;">
           <!-- <label for="usernameInput">Username</label> -->
           <div class="form-group">
             <input ng-minlength="1" required name="firstname" ng-class="{'is-invalid':regForm.firstname.$invalid && $ctrl.submitted }" ng-model="$ctrl.registerForm.firstName" type="text" class="form-control login-form-input" id="firstNameInput" aria-describedby="emailHelp" placeholder="First Name">
@@ -23,7 +23,7 @@
 
                   <button type="submit" ng-click="regForm.$valid ? $ctrl.setStep(2) : $ctrl.submitted = true;" class="btn login-btn">Sign Up</button>
             </div>
-                <div class="lang-select" ng-if="$ctrl.step === 2">
+                <div class="fade lang-select" ng-class="{'show': $ctrl.step === 2}" ng-if="$ctrl.step === 2">
                   <ul class="list-group">
                     <li ng-repeat="lang in $ctrl.langs" ng-click="$ctrl.setLang(lang);" ng-class="{'active': $ctrl.registerForm.lang === lang}" class="list-group-item">{{lang}}</li>
                   </ul>
@@ -35,9 +35,9 @@
     </form>
   </div>
 
-  <button id="#registerErrorModal" style="display: none;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginErrorModal"/>
-  <div id="loginErrorModal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
+  <button id="#showErrorModal" style="display: none;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerErrorModal"/>
+  <div id="registerErrorModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" ng-if="angular.element('#registerErrorModal').css('display') !== 'none'">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Modal title</h5>
@@ -45,7 +45,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
 </div>
-<div class="modal-body">
+<div class="auth-error-modal modal-body">
   <p>Invalid registration data.</p>
 </div>
 <div class="modal-footer">
