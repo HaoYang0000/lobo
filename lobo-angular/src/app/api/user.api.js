@@ -49,7 +49,13 @@ export default class UserApi {
     }
     async register (registerData) {
         let data = await this.$timeout(
-            (registerData) => { console.log('Registration complete'); return this.login({ phone: '3140000000', password: 'catgif' }); }, 1000);
+            (registerData) => {
+                if (registerData.demo) {
+                    return this.login({ phone: '3140000000', password: 'catgif' });
+                }
+                console.log('Registration complete');
+                return this.login({ phone: '3140000000', password: 'catgif' });
+            }, 1000);
         console.log(data);
         return data;
         // let registerData = await this.users.post(data);

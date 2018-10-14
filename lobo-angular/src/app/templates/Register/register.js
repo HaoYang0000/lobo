@@ -1,9 +1,10 @@
 export class RegisterComponent {
-    constructor (UserApi, $state, $stateParams) {
+    constructor (UserApi, $state, $stateParams, $timeout) {
         console.log($state, $stateParams);
         if ($stateParams.loginError) {
             this.showErrorModal();
         }
+        this.$timeout = $timeout;
         this.$state = $state;
         this.api = UserApi;
         this.step = 1;
@@ -42,7 +43,6 @@ export class RegisterComponent {
             this.$state.transitionTo('login');
         } catch (err) {
             console.error('Login Error', err);
-            this.setStep(1);
             this.loginError = true;
             this.showErrorModal();
         }
@@ -54,7 +54,10 @@ export class RegisterComponent {
         return this._step;
     }
     setStep (step) {
-        this.step = step;
+        this.step = 0;
+        this.$timeout(() => {
+            this.step = step;
+        }, 500);
     }
     setLang (lang) {
         if (this.langs.includes(lang)) {
@@ -73,6 +76,7 @@ export class RegisterComponent {
     }
     hideModal () {
         this.modal.hide();
+        this.setStep(1);
     }
     static create () {
         return {
