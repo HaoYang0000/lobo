@@ -16,6 +16,25 @@
         <input ng-model="$ctrl.loginForm.password" type="password" class="form-control login-form-input" id="passwordInput" placeholder="Password">
   </div>
 
-        <button type="submit" ng-click="$ctrl.login();" class="btn login-btn">Login</button>
+        <button ng-disabled="$ctrl.loginSuccessful" type="submit" ng-click="$ctrl.login();" class="btn login-btn">Login</button>
     </form>
   </div>
+<button id="#showErrorModal" style="display: hidden" type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginErrorModal"/>
+  <div id="loginErrorModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" ng-click="$ctrl.hideModal()"data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Invalid phone number / password</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" ng-click="$ctrl.hideModal()" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
