@@ -46,6 +46,7 @@ def create_app(env=None, start_response=None):
     from app.views import review
     from app.views import conversation
     from app.views import recommendation
+    from app.views import user_events
 
     app.register_blueprint(index.app)
     app.register_blueprint(users.app)
@@ -56,6 +57,7 @@ def create_app(env=None, start_response=None):
     app.register_blueprint(review.app)
     app.register_blueprint(conversation.app)
     app.register_blueprint(recommendation.app)
+    app.register_blueprint(user_events.app)
 
     db.init_app(app)
 

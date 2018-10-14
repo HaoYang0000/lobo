@@ -1,7 +1,12 @@
+from sqlalchemy.orm import relationship
+
+from app.models import EventModel
 from app.models.BaseModel import BaseMeta, BaseModelExtended, BaseSchema
 from marshmallow import fields
 from sqlalchemy import Column, UniqueConstraint, text
 from sqlalchemy.dialects import mysql
+
+from app.models.UserEventRelationModel import UserEventRelationModel
 
 
 class UserModel(BaseModelExtended):
@@ -62,7 +67,7 @@ class UserModel(BaseModelExtended):
         nullable=False,
         default=False
     )
-    
+
     def __repr__(self):
         return (
             "UserModel(\

@@ -1,8 +1,9 @@
 from marshmallow import fields
-from sqlalchemy import Column
+from sqlalchemy import Column, or_
 from sqlalchemy.dialects import mysql
 from sqlalchemy.orm import relationship
 
+from app.models import UserModel
 from app.models.BaseModel import BaseMeta, BaseModelExtended, BaseSchema
 from app.models.UserEventRelationModel import UserEventRelationModel, UserEventRelationModelSchema
 
@@ -25,9 +26,7 @@ class EventModel(BaseModelExtended):
         nullable=False
     )
 
-    user_event = relationship(UserEventRelationModel,
-                              primaryjoin="UserEventRelationModel.event_id==EventModel.id")
-    
+
     def __repr__(self):
         return (
             "EventModel(\
