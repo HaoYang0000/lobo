@@ -16,13 +16,13 @@ class ServiceModel(BaseModelExtended):
         mysql.VARCHAR(255),
         nullable=False
     )
-    
+
     def __repr__(self):
         return (
             "ServiceModel(\
                 id='{id}', \
                 category='{category}' ,\
-                name='{name}, \
+                name='{name} \
                 ')"
         ).format(
             id=self.id,

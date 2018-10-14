@@ -128,6 +128,7 @@ class UserServiceResourceList(MethodResource):
         result = []
         for service in service_ids: 
             model = self.service_service.get_by_id(service.service_id)
+            model.is_expert = service.is_expert
             result.append(model)
         return result, status.HTTP_200_OK
 

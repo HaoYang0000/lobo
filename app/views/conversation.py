@@ -42,8 +42,7 @@ class ConversationDetail(MethodResource):
             or_(
                 ConversationModel.user_id_one == user_id,
                 ConversationModel.user_id_two == user_id
-            ),
-            ConversationModel.is_read == False
+            )
         )
         result_set = self.conversation_service.get_multiple(filters=[filter])
 

@@ -114,6 +114,7 @@ class UserAuthSchema(BaseSchema):
 class UserServiceSchema(BaseSchema):
     category = fields.String(dump_only=True)
     name = fields.String(dump_only=True)
+    is_expert = fields.Boolean(dump_only=True)
 
     class Meta(BaseMeta):
         model = UserModel
