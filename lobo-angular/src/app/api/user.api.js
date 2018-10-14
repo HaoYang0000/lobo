@@ -1,6 +1,8 @@
 
 export default class UserApi {
+
     constructor (Restangular) {
+        this.Restangular = Restangular;
         this.rest = Restangular.service('users');
         this.auth = Restangular.service('auth');
     }
@@ -10,20 +12,40 @@ export default class UserApi {
         console.log(res.plain());
         return res.plain();
     }
-    async retrieve (userId,route) {
-        let req = this.rest.one(userId)
-        if(route){
-            req = req.one(route)
+    async retrieve (userId, route) {
+        let req = this.rest.one(userId);
+        if (route) {
+            req = req.one(route);
         }
         let res = await req.get();
         return res.plain();
     }
-
-    login (login) {
+    set token (token) {
+        this.Restangular.configuration.defaultHeaders = {
+            'Authentication': token
+        };
+        this._token = token;
+    }
+    get token () {
+        return this._token;
+    }
+    set data (data) {
+        if ('jwt' in data) {
+            this.token = data.jwt;
+        }
+        this._data = data;
+    }
+    get data () {
+        return this._data;
+    }
+    async login (login) {
         console.log(login.username, login.password);
-        return this.auth.post(undefined, {
+        let userdata = await this.auth.post({
+
             'phone': login.username,
             'password': login.password
         });
+        this.data = userdata;
+        return userdata;
     }
 }
