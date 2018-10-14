@@ -1,3 +1,4 @@
+
 export default function StateConfig ($stateProvider) {
 
     $stateProvider
@@ -66,7 +67,7 @@ export default function StateConfig ($stateProvider) {
                 }
             }
         }
-        ).state('conversation',
+    ).state('conversation',
         {
             // url: '^/conversation/:userId',
             views: {
@@ -82,12 +83,45 @@ export default function StateConfig ($stateProvider) {
         {
             name: 'login',
             url: '^/login/',
+            params: {
+                loginError: null
+            },
             views: {
                 'index': {
                     template: '<lobo-login/>'
                 }
             }
-        });
+        })
+        .state('login.loading',
+            {
+                name: 'loading',
+                url: '/loading/',
+                params: {
+                    loginData: null
+                },
+                views: {
+                    'index': {
+                        template: '<lobo-loading/>'
+                    }
+                }
+            }
+        )
+        .state('register',
+            {
+                name: 'register',
+                url: '^/register/',
+                params: {
+                    registerError: null
+                },
+                views: {
+                    'index': {
+                        template: '<lobo-register/>'
+                    }
+                }
+            });
+
+
+    ;
 
 
 

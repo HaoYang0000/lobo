@@ -1,4 +1,4 @@
-export class LoginComponent {
+export class RegisterComponent {
     constructor (UserApi, $state, $stateParams) {
         console.log($state, $stateParams);
         if ($stateParams.loginError) {
@@ -11,23 +11,20 @@ export class LoginComponent {
         //     $(this).val($(this).val().replace(/(\d{3})\-?(\d{3})\-?(\d{4})/, '$1-$2-$3'));
         // });
     }
-    async login () {
+    async register () {
         try {
-            let res = await this.api.login(this.loginForm);
-            console.log('got auth response', res);
+            let res = await this.api.register(this.loginForm);
+            console.log('got register response', res);
             if (!res) {
                 throw new Error('login error');
             }
             this.loginSuccessful = true;
-            this.$state.transitionTo('home');
+            this.$state.transitionTo('login');
         } catch (err) {
             console.error('Login Error', err);
             this.loginError = true;
             this.showErrorModal();
         }
-    }
-    register () {
-        // If we want to add a register page
     }
     showErrorModal () {
         this.modal.show();
@@ -46,10 +43,10 @@ export class LoginComponent {
     static create () {
         return {
             bindings: {
-                loginError: '='
+                registerError: '='
             },
-            controller: LoginComponent,
-            template: require('./login.html')
+            controller: RegisterComponent,
+            template: require('./register.html')
         };
     }
 }

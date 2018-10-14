@@ -12,11 +12,13 @@ import {GuideProfileComponent} from "./GuideProfile/guide-profile";
 import {ConversationComponent} from "./Conversation/conversation";
 import {MessageComponent} from "./Message/message";
 import { LoginComponent } from './Login/login';
+import { RegisterComponent } from './Register/register';
 
 
 export default angular.module('lobo.components', [])
     .component('loboHome', HomeComponent.create())
     .component('loboLogin', LoginComponent.create())
+    .component('loboRegister', RegisterComponent.create())
     .component('loboInbox', InboxComponent.create())
     .component('loboGuides', GuidesComponent.create())
     .component('loboConvCard', ConversationCardComponent.create())

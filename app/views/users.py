@@ -1,4 +1,8 @@
 import logging
+from hashlib import md5
+
+from marshmallow import fields
+from sqlalchemy import or_
 
 from app.models.UserModel import UserModelSchema, UserServiceSchema, UserEventSchema, UserReviewSchema
 from flask import Blueprint, abort, make_response
@@ -47,11 +51,13 @@ class UserResourceList(MethodResource):
             kwarg_filters=kwargs
         ), status.HTTP_200_OK
 
-    @use_kwargs(UserModelSchema().fields)
+    @use_kwargs({**UserModelSchema().fields, 'password': fields.String(required=True)})
     @marshal_with(UserModelSchema, code=status.HTTP_201_CREATED)
     @doc(description='Create a new user')
     def post(self, **kwargs):
-        _ = get_token_info()
+        password = kwargs.pop('password')
+        salt = 'LoboLObOlOBo'
+        kwargs['hashed_password'] = md5(f"{password}{salt}".encode()).hexdigest()
         new_user = self.user_service.create(**kwargs)
         return new_user, status.HTTP_201_CREATED
 
@@ -89,7 +95,12 @@ class UserEventResourceList(MethodResource):
     @doc(description='return all events associate with a user')
     def get(self, user_id, **kwargs):
         _ = get_token_info()
-        event_ids = UserEventRelationModel.query.filter(UserEventRelationModel.user_id == user_id).all()
+        event_ids = UserEventRelationModel.query.filter(
+            or_(
+                UserEventRelationModel.user_id_one == user_id,
+                UserEventRelationModel.user_id_two == user_id
+            )
+        ).all()
         result = []
         for event in event_ids:
             model = self.event_service.get_by_id(event.event_id)

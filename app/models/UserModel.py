@@ -9,7 +9,7 @@ class UserModel(BaseModelExtended):
 
     user_name = Column(
         mysql.VARCHAR(255),
-        nullable=False
+        nullable=True
     )
 
     hashed_password = Column(
