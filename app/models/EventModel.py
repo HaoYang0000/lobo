@@ -1,7 +1,10 @@
-from app.models.BaseModel import BaseMeta, BaseModelExtended, BaseSchema
 from marshmallow import fields
-from sqlalchemy import Column, UniqueConstraint, text
+from sqlalchemy import Column
 from sqlalchemy.dialects import mysql
+from sqlalchemy.orm import relationship
+
+from app.models.BaseModel import BaseMeta, BaseModelExtended, BaseSchema
+from app.models.UserEventRelationModel import UserEventRelationModel, UserEventRelationModelSchema
 
 
 class EventModel(BaseModelExtended):
@@ -21,6 +24,9 @@ class EventModel(BaseModelExtended):
         mysql.TIMESTAMP,
         nullable=False
     )
+
+    user_event = relationship(UserEventRelationModel,
+                              primaryjoin="UserEventRelationModel.event_id==EventModel.id")
     
     def __repr__(self):
         return (
@@ -36,6 +42,7 @@ class EventModel(BaseModelExtended):
             status=self.status,
             date=self.date
         )
+
 
 class EventModelSchema(BaseSchema):
     id = fields.Integer(dump_only=True)

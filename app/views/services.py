@@ -8,6 +8,7 @@ from flask_apispec.views import MethodResource
 from app.services.db.ServiceController import ServiceService
 from app.util.db_tool import unrequire
 from libs.parameters import RequestParams
+from libs.security import get_token_info
 
 logger = logging.getLogger(__name__)
 app = Blueprint(
@@ -25,6 +26,7 @@ class ServiceResourceList(MethodResource):
     })
     @doc(description='return all services')
     def get(self, **kwargs):
+        _ = get_token_info()
         page = kwargs.pop('page')
         limit = kwargs.pop('limit')
 
@@ -38,6 +40,7 @@ class ServiceResourceList(MethodResource):
     @marshal_with(ServiceModelSchema, code=status.HTTP_201_CREATED)
     @doc(description='Create a new service')
     def post(self, **kwargs):
+        _ = get_token_info()
         new_service = self.service_service.create(**kwargs)
         return new_service, status.HTTP_201_CREATED
 
@@ -47,6 +50,7 @@ class ServiceResourceDetail(MethodResource):
     @marshal_with(ServiceModelSchema, code=status.HTTP_200_OK)
     @doc(description='return service with id')
     def get(self, service_id, **kwargs):
+        _ = get_token_info()
         result = self.service_service.get_by_id(service_id)
         if result == None:
             abort(status.HTTP_404_NOT_FOUND)
@@ -55,6 +59,7 @@ class ServiceResourceDetail(MethodResource):
     @marshal_with(None, code=status.HTTP_204_NO_CONTENT)
     @doc(description='delete a service')
     def delete(self, service_id, **kwargs):
+        _ = get_token_info()
         result = self.service_service.delete_by_id(service_id)
         if result == False:
             abort(status.HTTP_404_NOT_FOUND)
@@ -64,6 +69,7 @@ class ServiceResourceDetail(MethodResource):
     @marshal_with(ServiceModelSchema, code=status.HTTP_200_OK)
     @doc(description='update a existing service')
     def put(self, service_id, **kwargs):
+        _ = get_token_info()
         result = self.service_service.update_by_id(service_id, kwargs)
         if result == None:
             abort(status.HTTP_404_NOT_FOUND)
@@ -73,6 +79,7 @@ class ServiceResourceDetail(MethodResource):
     @doc(description='partially update a recurring frequency')
     @marshal_with(ServiceModelSchema, code=status.HTTP_200_OK)
     def patch(self, service_id, **kwargs):
+        _ = get_token_info()
         result = self.service_service.update_by_id(service_id, kwargs)
         if result == None:
             abort(status.HTTP_404_NOT_FOUND)

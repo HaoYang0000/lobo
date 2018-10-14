@@ -8,6 +8,7 @@ from flask_apispec import doc, marshal_with, use_kwargs
 from flask_apispec.views import MethodResource
 from app.services.twilio import send_sms
 from app.models.UserModel import UserModelSchema
+from libs.security import get_token_info
 
 logger = logging.getLogger(__name__)
 app = Blueprint(
@@ -23,6 +24,7 @@ class Notifcation(MethodResource):
     @marshal_with(UserModelSchema, code=status.HTTP_200_OK)
     @doc(description='send a txt message to a user')
     def post(self, **kwargs):
+        _ = get_token_info()
         number = kwargs.get('to_number', None)
         body = kwargs.get('body', None)
 

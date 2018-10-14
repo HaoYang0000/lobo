@@ -9,6 +9,8 @@ from marshmallow import fields
 from recombee_api_client.api_client import RecombeeClient
 from recombee_api_client.api_requests import AddPurchase, RecommendItemsToUser, Batch
 
+from libs.security import get_token_info
+
 logger = logging.getLogger(__name__)
 app = Blueprint(
     'recommendation',
@@ -26,6 +28,7 @@ class Recommendation(MethodResource):
     @marshal_with(None, code=status.HTTP_200_OK)
     @doc(description='send recommendation record to Recombee')
     def post(self, user_id, service_id):
+        _ = get_token_info()
         client = RecombeeClient('globalhack', 'QluRxG1ZkI3kRKvukeXpscV4kRcTxIPAIYbxVjlD14FJlhS0rLdVYVxv25NNeBYC')
         request = AddPurchase(user_id, service_id, cascade_create=True)
         purchase_requests = [request]
@@ -42,6 +45,7 @@ class Recommendation(MethodResource):
     @marshal_with(None, code=status.HTTP_200_OK)
     @doc(description='get recommendation for a certain user from Recombee')
     def get(self, user_id):
+        _ = get_token_info()
         client = RecombeeClient('globalhack', 'QluRxG1ZkI3kRKvukeXpscV4kRcTxIPAIYbxVjlD14FJlhS0rLdVYVxv25NNeBYC')
         try:
             # get the recommendation

@@ -67,6 +67,7 @@ class UsersNearbyResourceList(MethodResource):
     })
     @doc(description='return all nearby guides')
     def get(self, **kwargs):
+        _ = get_token_info()
         uid = kwargs.pop('uid')
         page = kwargs.pop('page')
         limit = kwargs.pop('limit')
@@ -87,6 +88,7 @@ class UserEventResourceList(MethodResource):
     })
     @doc(description='return all events associate with a user')
     def get(self, user_id, **kwargs):
+        _ = get_token_info()
         event_ids = UserEventRelationModel.query.filter(UserEventRelationModel.user_id == user_id).all()
         result = []
         for event in event_ids:
@@ -106,6 +108,7 @@ class UserReviewResourceList(MethodResource):
     })
     @doc(description='return all reviews associate with a user')
     def get(self, user_id, **kwargs):
+        _ = get_token_info()
         review_ids = ReviewModel.query.filter(ReviewModel.user_id == user_id).all()
         result = []
         for review in review_ids:
@@ -124,6 +127,7 @@ class UserServiceResourceList(MethodResource):
     })
     @doc(description='return all reviews associate with a user')
     def get(self, user_id, **kwargs):
+        _ = get_token_info()
         service_ids = UserServiceRelationModel.query.filter(UserServiceRelationModel.user_id == user_id).all()
         result = []
         for service in service_ids: 

@@ -14,6 +14,7 @@ from app.models.Conversation import ConversationModelSchema
 from app.main import db
 from sqlalchemy import or_
 from app.util.db_tool import unrequire
+from libs.security import get_token_info
 
 logger = logging.getLogger(__name__)
 app = Blueprint(
@@ -29,6 +30,7 @@ class ConversationList(MethodResource):
     @marshal_with(ConversationModelSchema, code=status.HTTP_201_CREATED)
     @doc(description='generate a conversation from two users')
     def post(self, **kwargs):
+        _ = get_token_info()
         self.conversation_service.create(**kwargs)
         return []
 
@@ -38,6 +40,7 @@ class ConversationDetail(MethodResource):
     @marshal_with(ConversationModelSchema(many=True), code=status.HTTP_200_OK)
     @doc(description='generate a conversation from two users')
     def get(self, user_id, **kwargs):
+        _ = get_token_info()
         filter = and_(
             or_(
                 ConversationModel.user_id_one == user_id,

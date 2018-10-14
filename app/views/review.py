@@ -8,6 +8,7 @@ from flask_apispec.views import MethodResource
 from app.services.db.ReviewController import ReviewService
 from app.util.db_tool import unrequire
 from libs.parameters import RequestParams
+from libs.security import get_token_info
 
 logger = logging.getLogger(__name__)
 app = Blueprint(
@@ -25,6 +26,7 @@ class ReviewResourceList(MethodResource):
     })
     @doc(description='return all reviews')
     def get(self, **kwargs):
+        _ = get_token_info()
         page = kwargs.pop('page')
         limit = kwargs.pop('limit')
 
@@ -38,6 +40,7 @@ class ReviewResourceList(MethodResource):
     @marshal_with(ReviewModelSchema, code=status.HTTP_201_CREATED)
     @doc(description='Create a new review')
     def post(self, **kwargs):
+        _ = get_token_info()
         new_service = self.review_service.create(**kwargs)
         return new_service, status.HTTP_201_CREATED
 
@@ -47,6 +50,7 @@ class ReviewResourceDetail(MethodResource):
     @marshal_with(ReviewModelSchema, code=status.HTTP_200_OK)
     @doc(description='return review with id')
     def get(self, review_id, **kwargs):
+        _ = get_token_info()
         result = self.review_service.get_by_id(review_id)
         if result == None:
             abort(status.HTTP_404_NOT_FOUND)
@@ -55,6 +59,7 @@ class ReviewResourceDetail(MethodResource):
     @marshal_with(None, code=status.HTTP_204_NO_CONTENT)
     @doc(description='delete a review')
     def delete(self, review_id, **kwargs):
+        _ = get_token_info()
         result = self.review_service.delete_by_id(review_id)
         if result == False:
             abort(status.HTTP_404_NOT_FOUND)
@@ -64,6 +69,7 @@ class ReviewResourceDetail(MethodResource):
     @marshal_with(ReviewModelSchema, code=status.HTTP_200_OK)
     @doc(description='update a existing review')
     def put(self, review_id, **kwargs):
+        _ = get_token_info()
         result = self.review_service.update_by_id(review_id, kwargs)
         if result == None:
             abort(status.HTTP_404_NOT_FOUND)
@@ -73,6 +79,7 @@ class ReviewResourceDetail(MethodResource):
     @doc(description='partially update a review')
     @marshal_with(ReviewModelSchema, code=status.HTTP_200_OK)
     def patch(self, review_id, **kwargs):
+        _ = get_token_info()
         result = self.review_service.update_by_id(review_id, kwargs)
         if result == None:
             abort(status.HTTP_404_NOT_FOUND)
