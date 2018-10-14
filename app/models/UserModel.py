@@ -112,6 +112,7 @@ class UserAuthSchema(BaseSchema):
         dump_only = ['id', 'jwt']
 
 class UserServiceSchema(BaseSchema):
+    category = fields.String(dump_only=True)
     name = fields.String(dump_only=True)
 
     class Meta(BaseMeta):
