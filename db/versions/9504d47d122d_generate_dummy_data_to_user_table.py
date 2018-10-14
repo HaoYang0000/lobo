@@ -5,6 +5,8 @@ Revises: a7748fca292a
 Create Date: 2018-10-13 15:05:13.744879
 
 """
+import re
+
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.sql import table, column
@@ -62,7 +64,7 @@ def upgrade():
                 'first_name': first_name,
                 'last_name': fake.last_name_male(),
                 'birthday': fake.date_of_birth(),
-                'phone': fake.phone_number(),
+                'phone': re.sub('[^0-9]', '', fake.phone_number()),
                 'address': fake.address(),
                 'latitude': fake.latitude(),
                 'longitude': fake.longitude(),

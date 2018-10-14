@@ -23,11 +23,11 @@ app = Blueprint(
 class Auth(MethodResource):
     user_service = UserService()
     
-    @use_kwargs({'user_name': fields.Str(), 'password': fields.Str()})
+    @use_kwargs({'phone': fields.Str(), 'password': fields.Str()})
     @marshal_with(UserAuthSchema, code=status.HTTP_200_OK)
     @doc(description='auth a user')
     def post(self, **kwargs):
-        user_name = kwargs.get('user_name')
+        phone = kwargs.get('phone')
         password = kwargs.get('password')
 
         salt = 'LoboLObOlOBo'
@@ -35,7 +35,7 @@ class Auth(MethodResource):
 
         result = User.query.filter(
             and_(
-                User.user_name == user_name,
+                User.phone == phone,
                 User.hashed_password == hashed_password)
         ).one_or_none()
         if result is None:
