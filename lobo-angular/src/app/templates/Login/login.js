@@ -18,9 +18,17 @@ export class LoginComponent {
                 t[n] = v;
             }
         });
+        // $('#usernameInput').keyup(function () {
+        //     $(this).val($(this).val().replace(/(\d{3})\-?(\d{3})\-?(\d{4})/, '$1-$2-$3'));
+        // });
     }
-    login () {
-        this.api.login(loginProxy);
+    async login () {
+        try {
+            let res = await this.api.login(loginProxy);
+            console.log('got auth response', res);
+        } catch (err) {
+            console.error(err);
+        }
     }
     register () {
         // If we want to add a register page

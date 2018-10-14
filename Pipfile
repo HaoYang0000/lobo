@@ -1,42 +1,25 @@
 [[source]]
-
-url = "https://pypi.python.org/simple"
+url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[packages]
+alembic = "*"
+click = "*"
+flask = "*"
+flask-sqlalchemy = "*"
+coloredlogs = "*"
+flask-apispec = "*"
+flask-cors = "*"
+pyjwt = "*"
+flask-api = "*"
+marshmallow-sqlalchemy = "*"
+twilio = "*"
+recombee-api-client = "*"
+pymysql = "*"
+faker = "*"
 
 [dev-packages]
 
-
-
-[packages]
-
-flask = "*"
-flask-sqlalchemy = "*"
-alembic = "*"
-marshmallow-sqlalchemy = "*"
-click = "*"
-coloredlogs = "*"
-sqlalchemy = "*"
-twilio = "*"
-pycodestyle = "*"
-pymysql = "*"
-flask-mysql = "*"
-flask-api = "*"
-flask-apispec = "*"
-flask-cors = "*"
-gunicorn = "*"
-faker = "*"
-pyjwt = "*"
-recombee-api-client = "*"
-numpy = "*"
-
-
 [requires]
-
 python_version = "3.6"
-
-
-[pipenv]
-
-allow_prereleases = true

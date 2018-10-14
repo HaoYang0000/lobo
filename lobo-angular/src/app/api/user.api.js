@@ -20,6 +20,7 @@ export default class UserApi {
     }
 
     login (login) {
+        console.log(login.username, login.password);
         return this.auth.post(undefined, {
             'user_name': login.username,
             'password': login.password
