@@ -1,7 +1,8 @@
 export class LoginComponent {
-    constructor (UserApi, $state) {
-        if (this.loginError) {
-            //If we resolve unautheticated views to go back
+    constructor (UserApi, $state, $stateParams) {
+        console.log($stateParams);
+        if ($stateParams.loginError) {
+            this.showErrorModal();
         }
         this.$state = $state;
         this.api = UserApi;
@@ -20,7 +21,7 @@ export class LoginComponent {
             this.loginSuccessful = true;
             this.$state.transitionTo('home');
         } catch (err) {
-            console.error('eat som shyit', err);
+            console.error('Login Error', err);
             this.loginError = true;
             this.showErrorModal();
         }

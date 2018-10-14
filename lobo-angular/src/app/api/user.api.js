@@ -41,7 +41,6 @@ export default class UserApi {
     async login (login) {
         console.log(login.username, login.password);
         let userdata = await this.auth.post({
-
             'phone': login.username,
             'password': login.password
         });
