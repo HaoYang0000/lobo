@@ -16,18 +16,26 @@ class UserServiceRelationModel(BaseModelExtended):
         mysql.INTEGER(unsigned=True, display_width=11),
         ForeignKey('services.id', name='fk_user_service_id2')
     )
+
+    is_expert = Column(
+        mysql.BOOLEAN,
+        nullable=False,
+        default=False
+    )
     
     def __repr__(self):
         return (
             "ServiceModel(\
                 id='{id}', \
-                user_id='{user_id}, \
-                service_id='{service_id} \
+                user_id='{user_id}', \
+                service_id='{service_id}', \
+                is_expert='{is_expert}' \
                 ')"
         ).format(
             id=self.id,
             user_id=self.user_id,
-            service_id=self.service_id
+            service_id=self.service_id,
+            is_expert=self.is_expert
         )
 
 class UserServiceRelationModelSchema(BaseSchema):
