@@ -1,4 +1,5 @@
 import logging
+from _md5 import md5
 
 from app.models.UserModel import UserModelSchema, UserServiceSchema, UserEventSchema, UserReviewSchema
 from flask import Blueprint, abort, make_response
@@ -51,7 +52,9 @@ class UserResourceList(MethodResource):
     @marshal_with(UserModelSchema, code=status.HTTP_201_CREATED)
     @doc(description='Create a new user')
     def post(self, **kwargs):
-        _ = get_token_info()
+        password = kwargs.get('password')
+        salt = 'LoboLObOlOBo'
+        kwargs['hashed_password'] = md5(f"{password}{salt}".encode()).hexdigest()
         new_user = self.user_service.create(**kwargs)
         return new_user, status.HTTP_201_CREATED
 
