@@ -3,13 +3,11 @@
     <img class="login-logo" src="/img/logo.png">
   </div>
     <form class='login-form'>
-      <!-- type="tel" -->
-      <!-- pattern="[0-9]{0,3}[0-9]{3}-[0-9]{3}-[0-9]{4}"  -->
+
       <div name="$ctrl.loginForm" class="form-group">
         <!-- <label for="usernameInput">Username</label> -->
         <input ng-model="$ctrl.loginForm.username"
-      type="text"
-
+      type="tel"
        class="form-control login-form-input" id="usernameInput" aria-describedby="emailHelp" placeholder="Enter phone number">
         <!-- <small id="emailHelp" class="form-text text-muted">Enter username</small> -->
       </div>
