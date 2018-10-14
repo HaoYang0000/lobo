@@ -10,8 +10,9 @@ export default class UserApi {
         console.log(res.plain());
         return res.plain();
     }
-    retrieve (userId) {
-        return this.rest.one(userId).get();
+    async retrieve (userId) {
+        let res = await this.rest.one(userId).get();
+        return res.plain();
     }
     login (login) {
         return this.auth.post(undefined, {

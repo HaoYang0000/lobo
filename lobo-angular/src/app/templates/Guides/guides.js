@@ -5,7 +5,6 @@ export class GuidesComponent {
         this.api = UserApi;
         this.api.list().then((guides)=>{
             $scope.guides= guides;
-            console.log($scope);
             $scope.$apply();
         }).catch((err)=>{
             console.log(err);
