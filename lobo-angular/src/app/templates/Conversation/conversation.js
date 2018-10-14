@@ -1,6 +1,22 @@
 export class ConversationComponent {
-    constructor () {
-        console.log('conversation component', 'this ids');
+    constructor ($stateParams,$scope,ConversationApi) {
+
+        $scope.convo = $stateParams.convo;
+        this.ConversationApi = ConversationApi;
+        this.userId = 1;
+        $scope.sendMessage = () =>{
+            if($scope.entry){
+                const message = {
+                    content:$scope.entry,
+                    user_id_one:this.userId,
+                    user_id_two:$scope.convo.user.id,
+                    is_read:false,
+                }
+                this.ConversationApi.push(message)
+                $scope.convo.messages.push(message)
+                $scope.entry="";
+            }
+        }
     }
     $onInit () {
 

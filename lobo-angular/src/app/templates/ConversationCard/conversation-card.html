@@ -1,20 +1,20 @@
-<div class="conversation" ui-sref="conversation({conversationId:12})">
-    <div class="picture" style="background-image:url(/img/jared-guide.jpg)">
+<div class="conversation" ui-sref="conversation({convo:$ctrl.convo})">
+    <div class="picture" style="background-image:url(/img/users/{{$ctrl.convo.user.id}}.jpg)">
 
     </div>
     <div class="details">
         <div class="top-details">
             <div class="sender-name">
-                Jared
+                {{$ctrl.convo.user.first_name}}
             </div>
             <div class="timestamp">
-                13th Oct 2018
+                {{$ctrl.convo.messages[$ctrl.convo.messages.length-1].formattedDate}}
             </div>
         </div>
 
 
         <div class="preview">
-            Yes we could definitely get it done
+            {{$ctrl.convo.messages[$ctrl.convo.messages.length-1].content}}
         </div>
 
     </div>

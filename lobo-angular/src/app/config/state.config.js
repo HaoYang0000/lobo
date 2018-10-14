@@ -1,15 +1,7 @@
+
 export default function StateConfig ($stateProvider) {
+
     $stateProvider
-        .state('splash',
-            {
-                name: 'splash',
-                url: '^/',
-                views: {
-                    'index': {
-                        template: '</lobo-splash/>'
-                    }
-                }
-            })
         .state('home',
             {
                 name: 'home',
@@ -20,90 +12,86 @@ export default function StateConfig ($stateProvider) {
                     }
                 },
                 resolve: {
-                    login: function ($q, $state, $timeout, UserApi) {
+                    login: function ($q, $state) {
                         let deferred = $q.defer();
-                        $timeout(() => {
-                            if (!UserApi.data || !UserApi.token) {
-                                $state.go('login', { loginError: true });
-                                deferred.reject();
-                            } else {
-                                deferred.resolve();
-                            }
-                        });
-                        return deferred.promise;
+                        console.log('eat some shit');
+                        return true;
                     }
                 }
             }
         ).state('home.inbox',
-            {
-                url: '^/inbox/',
-                views: {
-                    'center@home': {
-                        template: '<lobo-inbox/>'
-                    }
+        {
+            url: '^/inbox/',
+            views: {
+                'center@home': {
+                    template: '<lobo-inbox/>'
                 }
             }
-        ).state('home.guides',
-            {
-                name: 'home.guides',
-                url: '^/guides/',
-                views: {
-                    'center@home': {
-                        template: '<lobo-guides/>'
-                    }
+        }
+    ).state('home.guides',
+        {
+            name: 'home.guides',
+            url: '^/',
+            views: {
+                'center@home': {
+                    template: '<lobo-guides/>'
                 }
             }
-        ).state('guide',
-            {
-                name: 'guide',
-                url: '^/guide/:userId/',
-                views: {
-                    'index': {
-                        template: '<lobo-guide/>'
-                    }
+        }
+    ).state('guide',
+        {
+            name: 'guide',
+            url: '^/guide/:userId/',
+            views: {
+                'index': {
+                    template: '<lobo-guide/>'
                 }
             }
-        ).state('guide.profile',
-            {
+        }
+    ).state('guide.profile',
+        {
 
-                views: {
-                    'guideContent@guide': {
-                        template: '<lobo-guide-profile/>'
-                    }
-                }
-            }
-        ).state('guide.request',
-            {
 
-                views: {
-                    'guideContent@guide': {
-                        template: '<lobo-guide-request/>'
-                    }
+            views: {
+                'guideContent@guide': {
+                    template: '<lobo-guide-profile/>'
                 }
             }
-        ).state('conversation',
-            {
-                name: 'conversation',
-                url: '^/conversation/:userId',
-                views: {
-                    'index': {
-                        template: '<lobo-conversation/>'
-                    }
+        }
+    ).state('guide.request',
+        {
+
+            views: {
+                'guideContent@guide': {
+                    template: '<lobo-guide-request/>'
                 }
             }
-        ).state('login',
-            {
-                name: 'login',
-                url: '^/login/',
-                params: {
-                    loginError: null
-                },
-                views: {
-                    'index': {
-                        template: '<lobo-login/>'
-                    }
+        }
+    ).state('conversation',
+        {
+            // url: '^/conversation/:userId',
+            views: {
+                'index': {
+                    template: '<lobo-conversation/>'
                 }
-            })
+            },
+            params: {
+                convo: { value: {} }
+            }
+        }
+    ).state('login',
+        {
+            name: 'login',
+            url: '^/login/',
+            params: {
+                loginError: null
+            },
+            views: {
+                'index': {
+                    template: '<lobo-login/>'
+                }
+            }
+        })
         .state('login.loading',
             {
                 name: 'loading',
@@ -131,4 +119,11 @@ export default function StateConfig ($stateProvider) {
                     }
                 }
             });
+
+
+    ;
+
+
+
+
 }

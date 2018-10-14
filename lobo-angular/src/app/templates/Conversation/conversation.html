@@ -1,1 +1,34 @@
-this is the conversation
+<div class="convo-container">
+    <div class="top-container">
+        <div class="details">
+            <a ui-sref="home.inbox" class="back-button">
+                <i class="fas fa-chevron-left"></i>
+            </a>
+            <div>
+                <div class="center-container">
+                    <div class="text-center">
+                        <div class="profile-picture" style="background-image:url(/img/users/{{convo.user.id}}.jpg)">
+                        </div>
+                    </div>
+
+                </div>
+                <h2>{{convo.user.first_name}} {{convo.user.last_name}}</h2>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="center-container">
+        <lobo-message ng-repeat="message in convo.messages" message="message"/>
+    </div>
+    <div class="bottom-container">
+        <input ng-model="entry"/>
+        <button class="send-button" ng-click="sendMessage()">
+            <i class="material-icons">
+                send
+            </i>
+        </button>
+    </div>
+
+</div>

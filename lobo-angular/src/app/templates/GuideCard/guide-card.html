@@ -1,4 +1,4 @@
-<div class="guide-card card" ui-sref="guide({userId:$ctrl.guide.id})">
+<div class="guide-card card" ui-sref="guide({userId:$ctrl.guide.id})" ng-class="{'expert':$ctrl.guide.is_expert}">
     <div class="card-body">
 
         <div style="background-image:url(/img/users/{{$ctrl.guide.id}}.jpg)" class="guide-pic"></div>

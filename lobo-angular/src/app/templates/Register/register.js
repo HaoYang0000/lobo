@@ -6,15 +6,35 @@ export class RegisterComponent {
         }
         this.$state = $state;
         this.api = UserApi;
-        this.loginForm = {};
+        this.step = 1;
+        this.langs = [
+            'English',
+            'Russion',
+            'Spanish',
+            'French',
+            'Arabic',
+            'Mandarin',
+            'Hindi',
+            'Japanese'
+        ];
         // $('#usernameInput').keyup(function () {
         //     $(this).val($(this).val().replace(/(\d{3})\-?(\d{3})\-?(\d{4})/, '$1-$2-$3'));
         // });
     }
+    $onInit () {
+        this.registerForm = {};
+    }
+    isComplete () {
+        let c = !!(this.registerForm.firstname && this.registerForm.lastname && this.registerForm.phone);
+        console.log(c);
+        return c;
+    }
     async register () {
         try {
-            let res = await this.api.register(this.loginForm);
+            this.submitted = true;
+            let res = await this.api.register(this.registerForm);
             console.log('got register response', res);
+
             if (!res) {
                 throw new Error('login error');
             }
@@ -22,8 +42,23 @@ export class RegisterComponent {
             this.$state.transitionTo('login');
         } catch (err) {
             console.error('Login Error', err);
+            this.setStep(1);
             this.loginError = true;
             this.showErrorModal();
+        }
+    }
+    set step (step) {
+        this._step = step;
+    }
+    get step () {
+        return this._step;
+    }
+    setStep (step) {
+        this.step = step;
+    }
+    setLang (lang) {
+        if (this.langs.includes(lang)) {
+            this.registerForm.lang = lang;
         }
     }
     showErrorModal () {
@@ -34,10 +69,9 @@ export class RegisterComponent {
         });
     }
     get modal () {
-        return angular.element('#loginErrorModal');
+        return angular.element('#registerErrorModal');
     }
     hideModal () {
-        console.log('hiding modal', angular.elemen);
         this.modal.hide();
     }
     static create () {
