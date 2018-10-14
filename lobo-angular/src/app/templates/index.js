@@ -1,11 +1,12 @@
 import angular from 'angular';
-import { HomeComponent } from './Main/main.js';
+import { HomeComponent } from './Home/home.js';
 import { InboxComponent } from './Inbox/inbox.js';
-import {GuidesComponent} from "./Guides/guides";
-import {GuideComponent} from "./Guide/guide";
-import {ConversationCardComponent} from "./ConversationCard/conversation-card";
-import {GuideCardComponent} from "./GuideCard/guide-card";
-import {ConversationComponent} from "./Conversation/conversation";
+import { GuidesComponent } from './Guides/guides';
+import { GuideComponent } from './Guide/guide';
+import { ConversationCardComponent } from './ConversationCard/conversation-card';
+import { GuideCardComponent } from './GuideCard/guide-card';
+import { ConversationComponent } from './Conversation/conversation';
+import { MainComponent } from './Main/main';
 
 export default angular.module('lobo.components', [])
     .component('loboHome', HomeComponent.create())

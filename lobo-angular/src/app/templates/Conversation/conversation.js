@@ -1,8 +1,9 @@
 export class ConversationComponent {
     constructor () {
+        console.log('conversation component', 'this ids');
     }
     $onInit () {
-        console.log('this ids')
+
     }
     $onDestroy () {
 

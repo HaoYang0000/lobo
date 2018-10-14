@@ -1,34 +1,62 @@
 export default function StateConfig ($stateProvider) {
-    $stateProvider.state(
-        {
-            name: 'home',
-            url: '/',
-            template: '<lobo-home/>',
-        }
-    ).state(
-        {
-            name: 'home.inbox',
-            url: '/',
-            template: '<lobo-inbox/>'
-        }
-    ).state(
-        {
-            name: 'home.guides',
-            url:'/',
-            template: '<lobo-guides/>'
-        }
-    ).state(
-        {
-            name: 'guide',
-            url:'/guide/:userId',
-            template: '<lobo-guide/>'
-        }
-    ).state(
-        {
-            name: 'conversation',
-            // url:'/conversation/:conversationId',
-            url:'/',
-            template: '<lobo-guide/>'
-        }
-    );
+    $stateProvider
+        .state('home',
+            {
+                name: 'home',
+                url: '^/',
+                views: {
+                    'index': {
+                        template: '<lobo-home/>'
+                    }
+                },
+                resolve: {
+                    login: function ($q, $state) {
+                        let deferred = $q.defer();
+                        console.log('eat some shit');
+                        return true;
+                    }
+                }
+            }
+        ).state('inbox',
+            {
+                parent: 'home',
+                url: '^/inbox/',
+                views: {
+                    'center@home': {
+                        template: '<lobo-inbox/>'
+                    }
+                }
+            }
+        ).state('guides',
+            {
+                parent: 'home',
+                name: 'home.guides',
+                url: '^/guides/',
+                views: {
+                    'center@home': {
+                        template: '<lobo-guides/>'
+                    }
+                }
+            }
+        ).state('guide',
+            {
+                name: 'guide',
+                url: '^/guide/:userId/',
+                views: {
+                    'index': {
+                        template: '<lobo-guide/>'
+                    }
+                }
+            }
+        ).state('conversation',
+            {
+                name: 'conversation',
+                url: '^/conversation/',
+                views: {
+                    'index': {
+                        template: '<lobo-conversation/>'
+                    }
+                }
+            }
+        );
 }
