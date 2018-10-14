@@ -1,5 +1,5 @@
 import logging
-from _md5 import md5
+from hashlib import md5
 
 from app.models.UserModel import UserModelSchema, UserServiceSchema, UserEventSchema, UserReviewSchema
 from flask import Blueprint, abort, make_response
