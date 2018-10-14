@@ -1,6 +1,8 @@
 import logging
 from hashlib import md5
 
+from marshmallow import fields
+
 from app.models.UserModel import UserModelSchema, UserServiceSchema, UserEventSchema, UserReviewSchema
 from flask import Blueprint, abort, make_response
 from flask_api import status
@@ -48,11 +50,11 @@ class UserResourceList(MethodResource):
             kwarg_filters=kwargs
         ), status.HTTP_200_OK
 
-    @use_kwargs(UserModelSchema().fields)
+    @use_kwargs({**UserModelSchema().fields, 'password': fields.String(required=True)})
     @marshal_with(UserModelSchema, code=status.HTTP_201_CREATED)
     @doc(description='Create a new user')
     def post(self, **kwargs):
-        password = kwargs.get('password')
+        password = kwargs.pop('password')
         salt = 'LoboLObOlOBo'
         kwargs['hashed_password'] = md5(f"{password}{salt}".encode()).hexdigest()
         new_user = self.user_service.create(**kwargs)
